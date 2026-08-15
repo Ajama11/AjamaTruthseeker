@@ -1,4 +1,6 @@
 {
+  "AJAMATRUTHSEEKER-FUTURE_QUESTIONS.title": "Future Questions",
   "AJAMATRUTHSEEKER-FUTURE_QUESTIONS.description": "#[gold]Rewrite[/gold].\n[gold]Held[/gold]: Gain !ForesightPower! [gold]Foresight[/gold].",
-  "AJAMATRUTHSEEKER-FUTURE_QUESTIONS.title": "Future Questions"
+  "AJAMATRUTHSEEKER-PRESENT_ANSWERS.title": "Present Answers",
+  "AJAMATRUTHSEEKER-PRESENT_ANSWERS.description": "#Deal !D! damage.\n[gold]Weapon Shaped[/gold]: Hits {Repeat:plural:an additional time|{} additional times}."
 }

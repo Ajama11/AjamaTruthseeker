@@ -40,14 +40,51 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Text/@EntryValue">namespace $NAMESPACE$;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Text/@EntryValue">using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
+using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
+using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+using BaseLib.Extensions;
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.ValueProps;
+using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
+
+namespace $NAMESPACE$;
 
 public class $CLASS$() : AjamaTruthseeker.AjamaTruthseekerCode.Cards.AjamaTruthseekerCard($COST$, MegaCrit.Sts2.Core.Entities.Cards.CardType.$TYPE$, MegaCrit.Sts2.Core.Entities.Cards.CardRarity.$RARITY$, MegaCrit.Sts2.Core.Entities.Cards.TargetType.$TARGET$) {
-    protected override IEnumerable&lt;MegaCrit.Sts2.Core.Localization.DynamicVars.DynamicVar&gt; CanonicalVars =&gt; [];
+    protected override IEnumerable&lt;MegaCrit.Sts2.Core.Localization.DynamicVars.DynamicVar&gt; CanonicalVars =&gt; 
+    [
+        $END$
+    ];
+    
+    public override List&lt;NonDynamicEffect&gt; MyNonDynamicEffects =&gt;
+    [
+        
+    ];
+    
+    public override List&lt;Shape.ShapeType&gt; MyShapeEffects =&gt;
+    [
+        
+    ];
+    
+    public override IEnumerable&lt;CardKeyword&gt; CanonicalKeywords =&gt;
+    [
+        
+    ];
+    
+    public override IEnumerable&lt;IHoverTip&gt; MyHoverTips =&gt; 
+    [
+        
+    ];
 
     protected override async System.Threading.Tasks.Task OnPlay(MegaCrit.Sts2.Core.GameActions.Multiplayer.PlayerChoiceContext choiceContext, MegaCrit.Sts2.Core.Entities.Cards.CardPlay play)
     {
-        $END$
+        
     }
 
     protected override void OnUpgrade() {

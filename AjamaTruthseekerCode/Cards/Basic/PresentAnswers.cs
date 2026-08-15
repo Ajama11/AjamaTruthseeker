@@ -1,0 +1,64 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
+using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
+using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
+using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+using BaseLib.Extensions;
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.ValueProps;
+using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
+
+namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Basic;
+
+public class PresentAnswers() : AjamaTruthseekerCard(1,
+    CardType.Attack, CardRarity.Basic,
+    TargetType.AnyEnemy)
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(5, DamageProps.card),
+        new RepeatVar(1)
+    ];
+
+    public override List<NonDynamicEffect> MyNonDynamicEffects =>
+    [
+        
+    ];
+
+    public override List<ShapeType> MyShapeEffects =>
+    [
+        ShapeType.Weapon
+    ];
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        MyEnums.Obscured
+    ];
+
+    public override IEnumerable<IHoverTip> MyHoverTips =>
+    [
+
+    ];
+
+    protected override async Task OnPlay(
+        PlayerChoiceContext choiceContext,
+        CardPlay play)
+    {
+        int hitCount = 1;
+        
+        await DoShapeEffect(ShapeType.Weapon, choiceContext, async () => hitCount += DynamicVars.Repeat.IntValue);
+
+        await CommonActions.CardAttack(this, play, hitCount)
+            .Execute(choiceContext);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(2);
+    }
+}

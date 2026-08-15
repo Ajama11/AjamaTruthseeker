@@ -12,18 +12,26 @@ public class Shape
 {
     public enum ShapeType
     {
+        Abstract,
+        AbstractRequired,
         Weapon,
         WeaponRequired,
         Friend,
-        FriendRequired,
-        Abstract,
-        AbstractRequired
+        FriendRequired
     }
 
     public static IEnumerable<IHoverTip> GetHoverTips(ShapeType shapeType)
     {
         return shapeType switch
         {
+            ShapeType.Abstract =>
+            [
+                HoverTipFactory.Static(MyEnums.AbstractShape), HoverTipFactory.FromPower<ShapedPowerAbstract>()
+            ],
+            ShapeType.AbstractRequired =>
+            [
+                HoverTipFactory.Static(MyEnums.AbstractRequired), HoverTipFactory.FromPower<ShapedPowerAbstract>()
+            ],
             ShapeType.Weapon =>
             [
                 HoverTipFactory.Static(MyEnums.WeaponShape), HoverTipFactory.FromPower<ShapedPowerWeapon>()
@@ -40,14 +48,6 @@ public class Shape
             [
                 HoverTipFactory.Static(MyEnums.FriendRequired), HoverTipFactory.FromPower<ShapedPowerFriend>()
             ],
-            ShapeType.Abstract =>
-            [
-                HoverTipFactory.Static(MyEnums.AbstractShape), HoverTipFactory.FromPower<ShapedPowerAbstract>()
-            ],
-            ShapeType.AbstractRequired =>
-            [
-                HoverTipFactory.Static(MyEnums.AbstractRequired), HoverTipFactory.FromPower<ShapedPowerAbstract>()
-            ],
             _ => throw new ArgumentOutOfRangeException(nameof(shapeType), shapeType, null)
         };
     }
@@ -56,12 +56,12 @@ public class Shape
     {
         return shapeType switch
         {
+            ShapeType.Abstract or ShapeType.AbstractRequired =>
+                ModelDb.Power<ShapedPowerAbstract>(),
             ShapeType.Weapon or ShapeType.WeaponRequired =>
                 ModelDb.Power<ShapedPowerWeapon>(),
             ShapeType.Friend or ShapeType.FriendRequired =>
                 ModelDb.Power<ShapedPowerFriend>(),
-            ShapeType.Abstract or ShapeType.AbstractRequired =>
-                ModelDb.Power<ShapedPowerAbstract>(),
             _ => throw new ArgumentOutOfRangeException(nameof(shapeType), shapeType, null)
         };
     }
@@ -70,13 +70,13 @@ public class Shape
     {
         return shapeType switch
         {
-            ShapeType.Weapon or 
-                ShapeType.Friend or 
-                ShapeType.Abstract 
+            ShapeType.Abstract or 
+                ShapeType.Weapon or 
+                ShapeType.Friend 
                 => false,
-            ShapeType.WeaponRequired or 
-                ShapeType.FriendRequired or 
-                ShapeType.AbstractRequired 
+            ShapeType.AbstractRequired or 
+                ShapeType.WeaponRequired or 
+                ShapeType.FriendRequired 
                 => true,
             _ => throw new ArgumentOutOfRangeException(nameof(shapeType), shapeType, null)
         };
@@ -86,12 +86,12 @@ public class Shape
     {
         return shapeType switch
         {
+            ShapeType.Abstract or ShapeType.AbstractRequired =>
+                "ABSTRACT",
             ShapeType.Weapon or ShapeType.WeaponRequired =>
                 "WEAPON",
             ShapeType.Friend or ShapeType.FriendRequired =>
                 "FRIEND",
-            ShapeType.Abstract or ShapeType.AbstractRequired =>
-                "ABSTRACT",
             _ => throw new ArgumentOutOfRangeException(nameof(shapeType), shapeType, null)
         };
     }
@@ -103,32 +103,31 @@ public class Shape
     {
         return shapeType switch
         {
+            ShapeType.Abstract or ShapeType.AbstractRequired =>
+                ShapeType.Abstract,
             ShapeType.Weapon or ShapeType.WeaponRequired =>
                 ShapeType.Weapon,
             ShapeType.Friend or ShapeType.FriendRequired =>
                 ShapeType.Friend,
-            ShapeType.Abstract or ShapeType.AbstractRequired =>
-                ShapeType.Abstract,
             _ => throw new ArgumentOutOfRangeException(nameof(shapeType), shapeType, null)
         };
     }
 
     public static async Task SetShape(Creature creature, ShapeType shapeType, PlayerChoiceContext choiceContext)
     {
-        shapeType = GetBaseShape(shapeType);
         ShapedPower? shapedPower = creature.GetPower<ShapedPower>();
         
         if (shapedPower == null)
         {
             shapedPower = ((ShapedPower) ModelDb.Power<ShapedPower>().ToMutable());
                     
-            shapedPower.SetCurrentShape(shapeType, false);
+            await shapedPower.SetCurrentShape(shapeType, true);
                     
             await PowerCmd.Apply(choiceContext, shapedPower, creature, 1, creature, null);
         }
         else
         {
-            shapedPower.SetCurrentShape(shapeType);
+            await shapedPower.SetCurrentShape(shapeType);
                 
             await PowerCmd.Apply<ShapedPower>(choiceContext,
                 creature, 1,

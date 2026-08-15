@@ -1,0 +1,17 @@
+{
+  "AJAMATRUTHSEEKER-FORESIGHT_POWER.title": "Foresight",
+  "AJAMATRUTHSEEKER-FORESIGHT_POWER.description": "You can see the top cards of your [gold]Draw Pile[/gold].\nReduces by [blue]1[/blue] at the end of your turn. Cannot exceed [blue]10[/blue].",
+  "AJAMATRUTHSEEKER-FORESIGHT_POWER.smartDescription": "#You can see the top [blue]{Amount}[/blue] card(s) of your [gold]Draw Pile[/gold].\nReduces by [blue]1[/blue] at the end of your turn. Cannot exceed [blue]10[/blue].",
+  "AJAMATRUTHSEEKER-SHAPED_POWER.title": "Abstract Shaped",
+  "AJAMATRUTHSEEKER-SHAPED_POWER.description": "You can perform [gold]Abstract Shape[/gold] and [gold]Abstract Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER.smartDescription": "You can perform [gold]Abstract Shape[/gold] and [gold]Abstract Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_WEAPON.title": "Weapon Shaped",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_WEAPON.description": "You can perform [gold]Weapon Shape[/gold] and [gold]Weapon Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_WEAPON.smartDescription": "You can perform [gold]Weapon Shape[/gold] and [gold]Weapon Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_FRIEND.title": "Friend Shaped",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_FRIEND.description": "You can perform [gold]Friend Shape[/gold] and [gold]Friend Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_FRIEND.smartDescription": "You can perform [gold]Friend Shape[/gold] and [gold]Friend Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_ABSTRACT.title": "Abstract Shaped",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_ABSTRACT.description": "You can perform [gold]Abstract Shape[/gold] and [gold]Abstract Required[/gold] effects on certain cards.",
+  "AJAMATRUTHSEEKER-SHAPED_POWER_ABSTRACT.smartDescription": "You can perform [gold]Abstract Shape[/gold] and [gold]Abstract Required[/gold] effects on certain cards."
+}

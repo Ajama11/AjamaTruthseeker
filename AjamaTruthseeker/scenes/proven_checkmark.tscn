@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://pd50xxkaomjc"]
+
+[ext_resource type="Texture2D" uid="uid://d8jv7u71xuqm" path="res://AjamaTruthseeker/images/ui/checkmark.png" id="1_6mk5k"]
+[ext_resource type="Script" uid="uid://cmekwem64daco" path="res://AjamaTruthseekerCode/Nodes/NTruthseekerProven.cs" id="2_3j882"]
+
+[node name="TruthseekerProven" type="TextureRect"]
+offset_left = 109.0
+offset_top = -218.0
+offset_right = 157.0
+offset_bottom = -170.0
+mouse_filter = 2
+texture = ExtResource("1_6mk5k")
+script = ExtResource("2_3j882")

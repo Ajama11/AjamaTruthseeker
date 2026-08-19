@@ -4,11 +4,12 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 
-public class ForesightVar(string name, decimal baseValue) : PowerVar<ForesightPower>(name, baseValue)
+public class ForesightVar(string name, decimal baseValue, bool skipTooltip = false) : PowerVar<ForesightPower>(name, baseValue)
 {
     public const string Key = "ForesightPower";
+    public bool SkipTooltip = skipTooltip;
 
-    public ForesightVar(decimal baseValue) : this(Key, baseValue) { }
+    public ForesightVar(decimal baseValue, bool skipTooltip = false) : this(Key, baseValue, skipTooltip) { }
 }
 
 public static class ForesightVarExtension

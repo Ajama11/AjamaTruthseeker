@@ -2,6 +2,7 @@
 using BaseLib.Extensions;
 using BaseLib.Utils;
 using AjamaTruthseeker.AjamaTruthseekerCode.Character;
+using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
@@ -120,6 +121,44 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
             if (HasRewrite)
             {
                 afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Rewrite), HoverTipFactory.FromPower<ForesightPower>()];
+            }
+
+            if (DynamicVars.Values.Any(dv => dv is ObscureVar { SkipTooltip: false }))
+            {
+                afterMiddle =
+                [
+                    ..afterMiddle,
+                    HoverTipFactory.Static(MyEnums.Obscure),
+                    HoverTipFactory.FromKeyword(MyEnums.Obscured),
+                    HoverTipFactory.FromPower<ForesightPower>()
+                ];
+            }
+            
+            if (DynamicVars.Values.Any(dv => dv is ProveVar { SkipTooltip: false }))
+            {
+                afterMiddle =
+                [
+                    ..afterMiddle,
+                    HoverTipFactory.Static(MyEnums.Prove),
+                    HoverTipFactory.FromPower<ForesightPower>(),
+                    HoverTipFactory.FromKeyword(MyEnums.Obscured)
+                ];
+            }
+            
+            if (DynamicVars.Values.Any(dv => dv is CertifyVar { SkipTooltip: false }))
+            {
+                afterMiddle =
+                [
+                    ..afterMiddle,
+                    HoverTipFactory.Static(MyEnums.Certify),
+                    HoverTipFactory.FromPower<ForesightPower>(),
+                    HoverTipFactory.FromKeyword(MyEnums.Obscured)
+                ];
+            }
+            
+            if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
+            {
+                afterMiddle = [..afterMiddle, HoverTipFactory.FromPower<ForesightPower>()];
             }
 
             if (HasShapeEffect)

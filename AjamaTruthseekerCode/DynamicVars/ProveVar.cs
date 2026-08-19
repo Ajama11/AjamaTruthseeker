@@ -3,14 +3,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 
-public class ProveVar : DynamicVar
+public class ProveVar(string name, decimal baseValue, bool skipTooltip = false) : DynamicVar(name, baseValue)
 {
     public const string Key = "Prove";
-    
-    public ProveVar(string name, decimal baseValue, bool skipTooltip = false) : base(name, baseValue)
-    {
-        if (!skipTooltip) this.WithTooltip();
-    }
+    public bool SkipTooltip = skipTooltip;
     
     public ProveVar(decimal baseValue, bool skipTooltip = false) : this(Key, baseValue, skipTooltip) { }
 }

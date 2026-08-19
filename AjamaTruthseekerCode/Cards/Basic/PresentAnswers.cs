@@ -51,10 +51,16 @@ public class PresentAnswers() : AjamaTruthseekerCard(1,
     {
         int hitCount = 1;
         
-        await DoShapeEffect(ShapeType.Weapon, choiceContext, async () => hitCount += DynamicVars.Repeat.IntValue);
+        await DoShapeEffect(ShapeType.WeaponRequired, choiceContext, () =>
+        {
+            hitCount += DynamicVars.Repeat.IntValue;
+            return Task.CompletedTask;
+        });
 
         await CommonActions.CardAttack(this, play, hitCount)
             .Execute(choiceContext);
+
+        await DoShapeEffect(ShapeType.Weapon, choiceContext, () => Task.CompletedTask);
     }
 
     protected override void OnUpgrade()

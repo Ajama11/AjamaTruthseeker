@@ -2,5 +2,7 @@
   "AJAMATRUTHSEEKER-FUTURE_QUESTIONS.title": "Future Questions",
   "AJAMATRUTHSEEKER-FUTURE_QUESTIONS.description": "#[gold]Rewrite[/gold].\n[gold]Held[/gold]: Gain !ForesightPower! [gold]Foresight[/gold].",
   "AJAMATRUTHSEEKER-PRESENT_ANSWERS.title": "Present Answers",
-  "AJAMATRUTHSEEKER-PRESENT_ANSWERS.description": "#Deal !D! damage.\n[gold]Weapon Shaped[/gold]: Hits {Repeat:plural:an additional time|{} additional times}."
+  "AJAMATRUTHSEEKER-PRESENT_ANSWERS.description": "#Deal !D! damage.\n[gold]Weapon Shaped[/gold]: Hits {Repeat:plural:an additional time|{} additional times}.",
+  "AJAMATRUTHSEEKER-DISSOCIATIVE_STRIKE.title": "Dissociative Strike",
+  "AJAMATRUTHSEEKER-DISSOCIATIVE_STRIKE.description": "#Deal !D! damage.\n[gold]Obscure[/gold] !Obscure! random cards in your [gold]Draw Pile[/gold].\n[gold]Defy[/gold]: [gold]Prove[/gold] !Prove! random cards in your [gold]Draw Pile[/gold]."
 }

@@ -11,37 +11,35 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Patches;
 [HarmonyPatch]
 public static class FromHandForDiscardDefyPatch
 {
-    [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromHandForDiscard), MethodType.Async)]
-    [HarmonyTranspiler]
-    static List<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    private static bool _isFromDiscard;
+    
+    [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromHandForDiscard))]
+    [HarmonyPrefix]
+    static void PrefixDiscard(out bool __state)
     {
-        MethodInfo adjustPrefs = typeof(FromHandForDiscardDefyPatch).Method(nameof(AdjustPrefs));
-
-        CodeMatcher matcher = new CodeMatcher(instructions)
-            .MatchStartForward([
-                new CodeMatch(OpCodes.Ldfld), // prefs
-                new CodeMatch(OpCodes.Ldarg_0), // this
-                new CodeMatch(OpCodes.Ldfld), // filter
-                new CodeMatch(OpCodes.Ldarg_0), // this
-                new CodeMatch(OpCodes.Ldfld), // source
-                new CodeMatch(OpCodes.Call),
-                new CodeMatch(OpCodes.Callvirt),
-                new CodeMatch(OpCodes.Stloc_3),
-            ])
-            .ThrowIfInvalid("FromHandForDiscardDefyPatch could not find the correct position")
-            .InsertAfter([
-                new CodeInstruction(OpCodes.Call, adjustPrefs)
-            ]);
-
-        return matcher.InstructionEnumeration().ToList();
+        __state = _isFromDiscard;
+        _isFromDiscard = true;
     }
-
-    private static CardSelectorPrefs AdjustPrefs(CardSelectorPrefs prefs)
+    
+    [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromHandForDiscard))]
+    [HarmonyPostfix]
+    static void PostfixDiscard(bool __state)
     {
-        CardSelectorPrefs newPrefs = prefs;
-
-        newPrefs.ShouldGlowGold = c => prefs.ShouldGlowGold!(c) || c is IOnPotentiallyDefy;
+        _isFromDiscard = __state;
+    }
+    
+    [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromHand))]
+    [HarmonyPrefix]
+    static void PrefixFromHand(ref CardSelectorPrefs prefs)
+    {
+        if (!_isFromDiscard || prefs.ShouldGlowGold is null) return;
         
-        return newPrefs;
+        var originalGlow = prefs.ShouldGlowGold;
+        
+        prefs.ShouldGlowGold = c =>
+        {
+            if (originalGlow(c)) return true;
+            return c is IOnPotentiallyDefy;
+        };
     }
 }

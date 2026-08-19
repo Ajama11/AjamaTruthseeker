@@ -63,7 +63,6 @@
 
     <ItemGroup>
         <Folder Include="AjamaTruthseekerCode\Cards\Ancient\" />
-        <Folder Include="AjamaTruthseekerCode\Cards\Common\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Multiplayer\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Rare\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Token\" />

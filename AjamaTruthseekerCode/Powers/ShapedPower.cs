@@ -32,7 +32,7 @@ public class ShapedPower() : AjamaTruthseekerPower
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<StrengthPower>(2),
-        new ForesightVar(1),
+        new CardsVar(1),
         new EnergyVar(1)
     ];
     
@@ -46,14 +46,12 @@ public class ShapedPower() : AjamaTruthseekerPower
                 await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner.Player!);
                 break;
             case ShapeType.Weapon:
-                await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), 
+                await PowerCmd.Apply<FlexPotionPower>(new ThrowingPlayerChoiceContext(), 
                     Owner, DynamicVars.Power<StrengthPower>().BaseValue, 
                     Owner, null);
                 break;
             case ShapeType.Friend:
-                await PowerCmd.Apply<ForesightPower>(new ThrowingPlayerChoiceContext(), 
-                    Owner, DynamicVars.Foresight.BaseValue, 
-                    Owner, null);
+                MyActions.ProveRandom(Owner.Player!, DynamicVars.Cards.IntValue, [PileType.Draw], MyEnums.PositionForesight.OnlyInclude);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

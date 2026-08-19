@@ -54,10 +54,11 @@ public class MyEnums
     [CustomEnum]
     public static CardPilePosition RandomOutsideForesight;
     
-    public enum ExcludeForesight
+    public enum PositionForesight
     {
-        No,
-        Try,
-        Yes
+        DontCare,
+        TryExclude,
+        Exclude,
+        OnlyInclude
     }
 }

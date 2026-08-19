@@ -1,11 +1,7 @@
-using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
-using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
-using BaseLib.Extensions;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Audio;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,11 +9,9 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.ValueProps;
-using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
 
-namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common;
+namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Attack;
 
 public class DissociativeStrike() : AjamaTruthseekerCard(1,
     CardType.Attack, CardRarity.Common,
@@ -30,17 +24,7 @@ public class DissociativeStrike() : AjamaTruthseekerCard(1,
         new ObscureVar(2),
         new ProveVar(2)
     ];
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-    [
-
-    ];
-
-    public override IEnumerable<IHoverTip> MyHoverTips =>
-    [
-
-    ];
-
+    
     protected override HashSet<CardTag> CanonicalTags =>
     [
         CardTag.Strike

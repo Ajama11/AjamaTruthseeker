@@ -122,7 +122,7 @@ public static class MyActions
         return cards;
     }
     
-    public static List<CardModel> GetRandomCards(Player player, int amount, List<PileType>? piles = null, Func<CardModel?, bool>? filter = null, MyEnums.ExcludeForesight excludeForesight = MyEnums.ExcludeForesight.No)
+    public static List<CardModel> GetRandomCards(Player player, int amount, List<PileType>? piles = null, Func<CardModel?, bool>? filter = null, MyEnums.PositionForesight positionForesight = MyEnums.PositionForesight.DontCare)
     {
         piles ??= [PileType.Draw];
         filter ??= _ => true; 
@@ -130,7 +130,9 @@ public static class MyActions
         List<PileType> pilesToUse = piles.ToList();
         List<CardModel> potentialCards = [];
 
-        if (excludeForesight != MyEnums.ExcludeForesight.No && piles.Contains(PileType.Draw) &&
+        // If we're Excluding Foresight cards, remove the Draw Pile from the list of piles to use, and append the cards that are outside of Foresight.
+        if (positionForesight is MyEnums.PositionForesight.TryExclude or MyEnums.PositionForesight.Exclude &&
+            piles.Contains(PileType.Draw) &&
             player.Creature.GetPowerAmount<ForesightPower>() > 0)
         {
             pilesToUse.Remove(PileType.Draw);
@@ -142,18 +144,42 @@ public static class MyActions
             potentialCards = [..potentialCards, ..nonForesightDrawPile.Where(filter)];
         }
 
+        // If we're Only Including Foresight cards, remove the Draw Pile from the list of piles to use, and append the cards in Foresight. 
+        if (positionForesight == MyEnums.PositionForesight.OnlyInclude &&
+            piles.Contains(PileType.Draw) &&
+            player.Creature.GetPowerAmount<ForesightPower>() > 0)
+        {
+            pilesToUse.Remove(PileType.Draw);
+            
+            var foresightCards = PileType.Draw.GetPile(player).Cards
+                .Chunk(player.Creature.GetPowerAmount<ForesightPower>())
+                .FirstOrDefault();
+
+            if (foresightCards != null)
+            {
+                potentialCards = [..potentialCards, ..foresightCards.Where(filter)];
+            }
+        }
+
+        // Grab the cards from the piles we're using. If we're doing Foresight shenanigans, the Draw Pile has been removed from this and already dealt with.
         potentialCards = pilesToUse.Aggregate(potentialCards, (current, pile) => 
             [..current, ..pile.GetPile(player).Cards.Where(filter)]);
 
-        if (excludeForesight == MyEnums.ExcludeForesight.Try && piles.Contains(PileType.Draw) && 
-            potentialCards.Count < amount && player.Creature.GetPowerAmount<ForesightPower>() > 0)
+        // If we're Trying to Exclude but we're short on cards to grab, then reintroduce the Foresight cards to the party to fill in the gaps.
+        // The only way we're still short after this is if there's straight up not enough cards to grab, which is expected behavior.
+        if (positionForesight == MyEnums.PositionForesight.TryExclude &&
+            piles.Contains(PileType.Draw) && 
+            potentialCards.Count < amount &&
+            player.Creature.GetPowerAmount<ForesightPower>() > 0)
         {
-            List<CardModel> foresightCards = PileType.Draw.GetPile(player).Cards
+            var foresightCards = PileType.Draw.GetPile(player).Cards
                 .Chunk(player.Creature.GetPowerAmount<ForesightPower>())
-                .First()
-                .ToList();
-            
-            potentialCards = [..potentialCards, ..foresightCards.Where(filter)];
+                .FirstOrDefault();
+
+            if (foresightCards != null)
+            {
+                potentialCards = [..potentialCards, ..foresightCards.Where(filter)];
+            }
         }
 
         List<CardModel> cards = potentialCards
@@ -231,11 +257,11 @@ public static class MyActions
         if (LocalContext.IsMe(player)) MySounds.Prove.Play();
     }
 
-    public static void ProveRandom(Player player, int amount, List<PileType>? piles = null)
+    public static void ProveRandom(Player player, int amount, List<PileType>? piles = null, MyEnums.PositionForesight positionForesight = MyEnums.PositionForesight.DontCare)
     {
         piles ??= [PileType.Draw];
 
-        List<CardModel> cards = GetRandomCards(player, amount, piles, Proven.IsAbleToBeProven);
+        List<CardModel> cards = GetRandomCards(player, amount, piles, Proven.IsAbleToBeProven, positionForesight);
         
         if (cards.Count == 0) return;
         
@@ -261,12 +287,12 @@ public static class MyActions
     }
     
     public static void ObscureRandom(Player player, int amount, List<PileType>? piles = null,
-        MyEnums.ExcludeForesight excludeForesight = MyEnums.ExcludeForesight.Try)
+        MyEnums.PositionForesight positionForesight = MyEnums.PositionForesight.TryExclude)
     {
         piles ??= [PileType.Draw];
 
         List<CardModel> cards = GetRandomCards(player, amount, piles,
-            Proven.IsAbleToBeProven, excludeForesight);
+            Proven.IsAbleToBeProven, positionForesight);
         
         if (cards.Count == 0) return;
         

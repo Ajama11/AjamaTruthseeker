@@ -64,15 +64,23 @@
     <ItemGroup>
         <Folder Include="AjamaTruthseekerCode\Cards\Ancient\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Multiplayer\" />
-        <Folder Include="AjamaTruthseekerCode\Cards\Rare\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Rare\Attack\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Rare\Power\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Rare\Skill\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Token\" />
-        <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Attack\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Power\" />
+        <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Skill\" />
         <Folder Include="AjamaTruthseeker\audio\" />
         <Folder Include="AjamaTruthseeker\images\card_portraits\big\"/>
         <Folder Include="AjamaTruthseeker\images\powers\big\"/>
         <Folder Include="AjamaTruthseeker\images\relics\big\"/>
         <Folder Include="AjamaTruthseeker\images\ui\" />
         <Folder Include="AjamaTruthseeker\scenes\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="cardloc-presets.json" />
     </ItemGroup>
 
     <Target Name="CheckDependencyPaths">

@@ -24,7 +24,7 @@ public static class MyHooks
     }
 
     /// <summary>
-    /// If for some reason this is being called outside AjamaTruthseekerCard OnForeseenWrapper(), remember to call the OnForeseenActivated too if necessary!
+    /// If for some reason IOnForeseenThis is implemented on something that's not an AjamaTruthseekerCard, remember to call the OnForeseenActivated too if necessary!
     /// </summary>
     public static Task OnPotentiallyForeseen(ICombatState combatState, PlayerChoiceContext choiceContext,
         CardModel card)
@@ -47,7 +47,7 @@ public static class MyHooks
     }
     
     /// <summary>
-    /// If for some reason this is being called outside AjamaTruthseekerCard OnDefyWrapper(), remember to call the OnDefyActivated too if necessary!
+    /// If for some reason IOnDefyThis is implemented on something that's not an AjamaTruthseekerCard, remember to call the OnDefyActivated too if necessary!
     /// </summary>
     public static Task OnPotentiallyDefy(ICombatState combatState, PlayerChoiceContext choiceContext,
         CardModel card)

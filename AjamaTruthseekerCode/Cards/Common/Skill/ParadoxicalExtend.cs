@@ -23,11 +23,6 @@ public class ParadoxicalExtend() : AjamaTruthseekerCard(0,
         new ForesightVar(1)
     ];
 
-    public override List<ShapeType> MyShapeEffects =>
-    [
-        ShapeType.Abstract
-    ];
-
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         MyEnums.Obscured
@@ -37,8 +32,7 @@ public class ParadoxicalExtend() : AjamaTruthseekerCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await DoShapeEffect(ShapeType.Abstract, choiceContext, async () => 
-            await CommonActions.CardBlock(this, play));
+        await CommonActions.CardBlock(this, play);
     }
     
     public async Task OnForeseen(PlayerChoiceContext choiceContext)

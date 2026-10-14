@@ -25,7 +25,6 @@ public class Axiom() : AjamaTruthseekerRelic
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
-        HoverTipFactory.FromPower<ShapedPowerAbstract>(),
         HoverTipFactory.FromPower<ForesightPower>()
     ];
 
@@ -33,10 +32,6 @@ public class Axiom() : AjamaTruthseekerRelic
         ICombatState combatState)
     {
         if (!participants.Contains(Owner.Creature) || Owner.PlayerCombatState!.TurnNumber > 1) return;
-        
-        await PowerCmd.Apply<ShapedPower>(choiceContext, 
-            Owner.Creature, 1, 
-            Owner.Creature, null, true);
 
         await PowerCmd.Apply<ForesightPower>(choiceContext, Owner.Creature,
             DynamicVars.Power<ForesightPower>().BaseValue, Owner.Creature, null, true);

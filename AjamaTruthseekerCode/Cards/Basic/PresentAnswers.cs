@@ -2,6 +2,7 @@ using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
@@ -9,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.ValueProps;
 using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
@@ -17,7 +19,8 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Basic;
 
 public class PresentAnswers() : AjamaTruthseekerCard(1,
     CardType.Attack, CardRarity.Basic,
-    TargetType.AnyEnemy)
+    TargetType.AnyEnemy),
+    ITranscendenceCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -67,4 +70,6 @@ public class PresentAnswers() : AjamaTruthseekerCard(1,
     {
         DynamicVars.Damage.UpgradeValueBy(2);
     }
+
+    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<DontCrashAncientOrobas>();
 }

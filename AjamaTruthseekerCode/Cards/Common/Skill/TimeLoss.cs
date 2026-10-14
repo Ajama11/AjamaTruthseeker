@@ -19,7 +19,7 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Skill;
 public class TimeLoss() : AjamaTruthseekerCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self),
-    IOnPotentiallyForeseen
+    IOnForeseenThis
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

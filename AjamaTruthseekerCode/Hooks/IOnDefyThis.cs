@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 
-public interface IOnPotentiallyDefy
+public interface IOnDefyThis
 {
     public Task OnDefy(CardModel card, PlayerChoiceContext choiceContext);
 }

@@ -58,7 +58,7 @@ public static class MyActions
             cardsToRewrite.Count
         )
         {
-            ShouldGlowGold = c => c is IOnPotentiallyDefy
+            ShouldGlowGold = c => c is IOnDefyThis
         };
 
         var cardsToDiscard = (await CardSelectCmd.FromSimpleGrid(

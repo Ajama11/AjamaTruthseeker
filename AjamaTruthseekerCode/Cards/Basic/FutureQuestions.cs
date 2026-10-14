@@ -14,7 +14,7 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Basic;
 
 public class FutureQuestions() : AjamaTruthseekerCard(1,
     CardType.Skill, CardRarity.Basic,
-    TargetType.Self), IOnPotentiallyDefy
+    TargetType.Self), IOnDefyThis
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

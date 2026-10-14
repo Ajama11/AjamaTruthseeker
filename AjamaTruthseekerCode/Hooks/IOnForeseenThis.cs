@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 
-public interface IOnPotentiallyForeseen
+public interface IOnForeseenThis
 {
     public Task OnForeseen(PlayerChoiceContext choiceContext);
 }

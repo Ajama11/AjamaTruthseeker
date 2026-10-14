@@ -24,7 +24,7 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Skill;
 public class Disorient() : AjamaTruthseekerCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.None),
-    IOnPotentiallyDefy
+    IOnDefyThis
 {
     public override TargetType TargetType => IsAbstractShaped ? TargetType.AnyEnemy : TargetType.None;
     

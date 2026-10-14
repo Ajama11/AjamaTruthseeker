@@ -55,8 +55,8 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
 
     public bool HasRewrite => MyNonDynamicEffects.Contains(NonDynamicEffect.Rewrite);
     public bool HasDrawnEffect => MyNonDynamicEffects.Contains(NonDynamicEffect.Drawn);
-    public virtual bool HasForeseenEffect => this is IOnPotentiallyForeseen;
-    public virtual bool HasDefyEffect => this is IOnPotentiallyDefy;
+    public virtual bool HasForeseenEffect => this is IOnForeseenThis;
+    public virtual bool HasDefyEffect => this is IOnDefyThis;
     public bool HasHeldEffect => MyNonDynamicEffects.Contains(NonDynamicEffect.Held);
     public bool HasShapeEffect => MyShapeEffects.Count != 0;
 
@@ -207,7 +207,7 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     public async Task OnDefyWrapper(CardModel card, PlayerChoiceContext choiceContext)
     {
         if (card != this) return;
-        if (this is not IOnPotentiallyDefy thisDefy) return;
+        if (this is not IOnDefyThis thisDefy) return;
 
         await CardPileCmd.Add(this, PileType.Play);
 
@@ -224,7 +224,7 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     public async Task OnForeseenWrapper(CardModel card, PlayerChoiceContext choiceContext)
     {
         if (card != this) return;
-        if (this is not IOnPotentiallyForeseen thisForeseen) return;
+        if (this is not IOnForeseenThis thisForeseen) return;
 
         AjamaTruthseekerCard dupe = (AjamaTruthseekerCard) CreateDupe(Owner);
         

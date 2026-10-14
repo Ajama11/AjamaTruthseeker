@@ -29,10 +29,10 @@ public static class MyHooks
     public static Task OnPotentiallyForeseen(ICombatState combatState, PlayerChoiceContext choiceContext,
         CardModel card)
     {
-        return Dispatch<IOnPotentiallyForeseen>(combatState, choiceContext,
+        return Dispatch<IOnForeseenThis>(combatState, choiceContext,
             listener => listener is AjamaTruthseekerCard listenerCard
                 ? listenerCard.OnForeseenWrapper(card, choiceContext)
-                : card is IOnPotentiallyForeseen
+                : card is IOnForeseenThis
                     ? listener.OnForeseen(choiceContext)
                     : Task.CompletedTask
         );
@@ -52,10 +52,10 @@ public static class MyHooks
     public static Task OnPotentiallyDefy(ICombatState combatState, PlayerChoiceContext choiceContext,
         CardModel card)
     {
-        return Dispatch<IOnPotentiallyDefy>(combatState, choiceContext,
+        return Dispatch<IOnDefyThis>(combatState, choiceContext,
             listener => listener is AjamaTruthseekerCard listenerCard
                 ? listenerCard.OnDefyWrapper(card, choiceContext)
-                : card is IOnPotentiallyDefy
+                : card is IOnDefyThis
                     ? listener.OnDefy(card, choiceContext)
                     : Task.CompletedTask
         );

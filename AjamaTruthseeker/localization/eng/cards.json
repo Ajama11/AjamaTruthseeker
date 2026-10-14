@@ -10,5 +10,7 @@
   "AJAMATRUTHSEEKER-TIME_LOSS.title": "Time Loss",
   "AJAMATRUTHSEEKER-TIME_LOSS.description": "#[gold]Friend Shaped[/gold]: Gain [E?].\n[gold]Foreseen[/gold]: Draw !C! card(s).",
   "AJAMATRUTHSEEKER-DISORIENT.title": "Disorient",
-  "AJAMATRUTHSEEKER-DISORIENT.description": "#[gold]Abstract Shape[/gold]: Apply !WeakPower! [gold]Weak[/gold].\n[gold]Defy[/gold]: Put this card into your [gold]Hand[/gold] next turn."
+  "AJAMATRUTHSEEKER-DISORIENT.description": "#[gold]Abstract Shape[/gold]: Apply !WeakPower! [gold]Weak[/gold].\n[gold]Defy[/gold]: Put this card into your [gold]Hand[/gold] next turn.",
+  "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.title": "",
+  "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.description": ""
 }

@@ -16,7 +16,7 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Attack;
 public class DissociativeStrike() : AjamaTruthseekerCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy),
-    IOnPotentiallyDefy
+    IOnDefyThis
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

@@ -39,7 +39,7 @@ public static class FromHandForDiscardDefyPatch
         prefs.ShouldGlowGold = c =>
         {
             if (originalGlow(c)) return true;
-            return c is IOnPotentiallyDefy;
+            return c is IOnDefyThis;
         };
     }
 }

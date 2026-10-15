@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqskwxwy64wgr"]
+
+[ext_resource type="Texture2D" uid="uid://hodtdmn0bv0x" path="res://AjamaTruthseeker/images/ui/obscured_count.png" id="1_cht52"]
+[ext_resource type="Script" uid="uid://4no65rjarey6" path="res://AjamaTruthseekerCode/Nodes/TruthseekerMegaLabel.cs" id="1_g8vm7"]
+[ext_resource type="Script" uid="uid://n8rtabu2waws" path="res://AjamaTruthseekerCode/Nodes/NObscuredCount.cs" id="1_krm5t"]
+
+[node name="ObscuredContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -912.0
+offset_bottom = -492.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_krm5t")
+
+[node name="InnerContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 48.0
+offset_right = 96.0
+offset_bottom = 48.0
+pivot_offset = Vector2(24, 24)
+
+[node name="Background" type="TextureRect" parent="InnerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_cht52")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InnerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -26.0
+offset_right = -12.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.114126645, 0.0544, 0.17, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_font_sizes/font_size = 26
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_g8vm7")
+MinFontSize = 20
+MaxFontSize = 26
+theme_override_colors/font_outline_color = Color(0.114126645, 0.0544, 0.17, 1)

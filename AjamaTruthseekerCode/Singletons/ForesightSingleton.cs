@@ -44,6 +44,8 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     public static readonly SpireField<CardModel, bool> ForeseenThisDeckCycle = new(() => false);
     public static readonly SpireField<PlayerCombatState, int> NumberOfObscuredCardsInForesight = new(() => 0);
 
+    public static event Action? NumberOfObscuredCardsInForesightChanged;
+
     public async Task RunScopeAfterRoomEntered(AbstractRoom room)
     {
         if (room is not CombatRoom combatRoom) return;
@@ -79,9 +81,6 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     /// Update card previews whenever anyone plays a card, because of situations like Midnight updating its energy cost from another player's actions.
     public override async Task AfterCardPlayedLate(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // Player localPlayer = LocalContext.GetMe(cardPlay.Card.CombatState)!;
-        // UpdateCardPreviews(localPlayer.PlayerCombatState!.DrawPile, localPlayer.Creature.GetPowerAmount<ForesightPower>());
-        // return Task.CompletedTask;
         ICombatState? combatState = cardPlay.Card.Owner.Creature.CombatState;
         if (combatState == null) return;
         
@@ -94,13 +93,6 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier,
         CardModel? cardSource)
     {
-        // if (power is not ForesightPower) return Task.CompletedTask;
-        //
-        // Player localPlayer = LocalContext.GetMe(power.Owner.CombatState)!;
-        // if (power.Owner != localPlayer.Creature) return Task.CompletedTask; 
-        //
-        // UpdateCardPreviews(localPlayer.PlayerCombatState!.DrawPile, localPlayer.Creature.GetPowerAmount<ForesightPower>());
-        // return Task.CompletedTask;
         if (power is not ForesightPower) return;
         if (power.Owner.Player == null) return;
         
@@ -115,11 +107,6 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         
         NumberOfObscuredCardsInForesight[player.PlayerCombatState] = 0;
         
-        if (LocalContext.IsMe(player))
-        {
-            UpdateCardPreviews(drawPile, foresightAmount);
-        }
-        
         for (var i = 0; i < Math.Min(drawPile.Cards.Count, foresightAmount); i++)
         {
             var card = drawPile.Cards[i];
@@ -132,6 +119,11 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
             ForeseenThisDeckCycle[card] = true;
             await MyHooks.OnPotentiallyForeseen(player.Creature.CombatState!, new ThrowingPlayerChoiceContext(), card);
         }
+
+        if (LocalContext.IsMe(player))
+        {
+            NumberOfObscuredCardsInForesightChanged?.Invoke();
+        }
     }
     
     private void CreateCardPreviews(Player player, CardPile drawPile)
@@ -143,7 +135,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         ui.MoveChild(holderParent, 0);
 
         Timer refreshTimer = new Timer();
-        refreshTimer.WaitTime = 1;
+        refreshTimer.WaitTime = 0.125;
         refreshTimer.OneShot = false;
         refreshTimer.Timeout += () => RefreshTimerOnTimeout(player, drawPile);
         

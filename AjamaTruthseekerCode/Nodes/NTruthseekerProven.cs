@@ -5,5 +5,5 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 
 public partial class NTruthseekerProven : TextureRect
 {
-    
+
 }

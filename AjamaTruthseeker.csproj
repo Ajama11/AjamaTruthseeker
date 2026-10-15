@@ -75,7 +75,6 @@
         <Folder Include="AjamaTruthseeker\images\card_portraits\big\"/>
         <Folder Include="AjamaTruthseeker\images\powers\big\"/>
         <Folder Include="AjamaTruthseeker\images\relics\big\"/>
-        <Folder Include="AjamaTruthseeker\images\ui\" />
         <Folder Include="AjamaTruthseeker\scenes\" />
     </ItemGroup>
 

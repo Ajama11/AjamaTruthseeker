@@ -1,5 +1,6 @@
 ﻿using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips;
 using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Status;
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
@@ -71,136 +72,6 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
-        // get
-        // {
-            // IEnumerable<IHoverTip> start = [];
-            // IEnumerable<IHoverTip> beforeMiddle = [];
-            // IEnumerable<IHoverTip> middle = [..MyHoverTips];
-            // IEnumerable<IHoverTip> afterMiddle = [];
-            // IEnumerable<IHoverTip> end = [];
-            //
-            // #region Start
-            //
-            // if (Keywords.Contains(MyEnums.Obscured))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(MyEnums.Obscured), HoverTipFactory.FromPower<ForesightPower>()];
-            // }
-            //
-            // if (Keywords.Contains(CardKeyword.Unplayable))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Unplayable)];
-            // }
-            //
-            // if (Keywords.Contains(CardKeyword.Innate))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Innate)];
-            // }
-            //
-            // if (Keywords.Contains(CardKeyword.Retain))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Retain)];
-            // }
-            //
-            // if (Keywords.Contains(CardKeyword.Sly))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Sly)];
-            // }
-            //
-            // if (Keywords.Contains(CardKeyword.Ethereal))
-            // {
-            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Ethereal)];
-            // }
-            //
-            // #endregion
-            //
-            // #region Before Middle
-            //
-            // if (GainsBlock)
-            // {
-            //     beforeMiddle = [..beforeMiddle, HoverTipFactory.Static(StaticHoverTip.Block)];
-            // }
-            //
-            // #endregion
-            //
-            // #region After Middle
-            //
-            // if (HasRewrite)
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Rewrite), HoverTipFactory.FromPower<ForesightPower>()];
-            // }
-            //
-            // if (DynamicVars.Values.Any(dv => dv is ObscureVar { SkipTooltip: false }))
-            // {
-            //     afterMiddle =
-            //     [
-            //         ..afterMiddle,
-            //         HoverTipFactory.Static(MyEnums.Obscure),
-            //         HoverTipFactory.FromKeyword(MyEnums.Obscured),
-            //         HoverTipFactory.FromPower<ForesightPower>()
-            //     ];
-            // }
-            //
-            // if (DynamicVars.Values.Any(dv => dv is ProveVar { SkipTooltip: false }))
-            // {
-            //     afterMiddle =
-            //     [
-            //         ..afterMiddle,
-            //         HoverTipFactory.Static(MyEnums.Prove),
-            //         HoverTipFactory.FromPower<ForesightPower>(),
-            //         HoverTipFactory.FromKeyword(MyEnums.Obscured)
-            //     ];
-            // }
-            //
-            // if (DynamicVars.Values.Any(dv => dv is CertifyVar { SkipTooltip: false }))
-            // {
-            //     afterMiddle =
-            //     [
-            //         ..afterMiddle,
-            //         HoverTipFactory.Static(MyEnums.Certify),
-            //         HoverTipFactory.FromPower<ForesightPower>(),
-            //         HoverTipFactory.FromKeyword(MyEnums.Obscured)
-            //     ];
-            // }
-            //
-            // if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.FromPower<ForesightPower>()];
-            // }
-            //
-            // if (HasDrawnEffect)
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Drawn)];
-            // }
-            //
-            // if (HasForeseenEffect)
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Foreseen), HoverTipFactory.FromPower<ForesightPower>()];
-            // }
-            //
-            // if (HasDefyEffect)
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Defy)];
-            // }
-            //
-            // if (HasHeldEffect)
-            // {
-            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Held)];
-            // }
-            //
-            // #endregion
-            //
-            // #region End
-            //
-            // if (Keywords.Contains(CardKeyword.Exhaust))
-            // {
-            //     end = [..end, HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
-            // }
-            //
-            // #endregion
-            //
-            // return [..start, ..beforeMiddle, ..middle, ..afterMiddle, ..end];
-        // }
-        
         get
         {
             BundledHoverTipManager bundles = [];
@@ -274,6 +145,11 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
             if (DynamicVars.Values.Any(dv => dv is CertifyVar { SkipTooltip: false }))
             {
                 bundles.Add(new CertifyBundle());
+            }
+            
+            if (DynamicVars.Values.Any(dv => dv is NihilityVar { SkipTooltip: false }))
+            {
+                bundles.Add(BundledHoverTipFactory.FromCard<Nihility>());
             }
 
             if (HasDrawnEffect)

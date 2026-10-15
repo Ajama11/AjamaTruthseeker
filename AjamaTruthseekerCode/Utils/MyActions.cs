@@ -1,4 +1,5 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
+using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Status;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
@@ -297,5 +298,29 @@ public static class MyActions
         if (cards.Count == 0) return;
         
         Obscure(cards);
+    }
+
+    public static async Task CreateNihility(
+        AjamaTruthseekerCard sourceCard,
+        PileType pile = PileType.Draw, CardPilePosition? position = null,
+        bool preview = true, float previewTime = 1.2f,
+        Func<List<CardModel>, List<CardModel>>? modifyCardsBeforePreview = null)
+    {
+        await CreateCards(ModelDb.Card<Nihility>(),
+            sourceCard.DynamicVars.Nihility.IntValue, sourceCard,
+            pile, position ?? MyEnums.RandomOutsideForesight,
+            preview, previewTime, modifyCardsBeforePreview);
+    }
+    
+    public static async Task CreateNihility(
+        int amount, Player owner, ICombatState combatState,
+        PileType pile = PileType.Draw, CardPilePosition? position = null,
+        bool preview = true, float previewTime = 1.2f,
+        Func<List<CardModel>, List<CardModel>>? modifyCardsBeforePreview = null)
+    {
+        await CreateCards(ModelDb.Card<Nihility>(),
+            amount, owner, combatState,
+            pile, position ?? MyEnums.RandomOutsideForesight,
+            preview, previewTime, modifyCardsBeforePreview);
     }
 }

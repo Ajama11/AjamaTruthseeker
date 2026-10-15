@@ -12,5 +12,9 @@
   "AJAMATRUTHSEEKER-DISORIENT.title": "Disorient",
   "AJAMATRUTHSEEKER-DISORIENT.description": "#Apply !WeakPower! [gold]Weak[/gold].\n[gold]Defy[/gold]: Put this card into your [gold]Hand[/gold] next turn.",
   "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.title": "",
-  "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.description": ""
+  "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.description": "",
+  "AJAMATRUTHSEEKER-NIHILITY.title": "Nihility",
+  "AJAMATRUTHSEEKER-NIHILITY.description": "#[gold]Drawn[/gold]: Draw !C! card(s).\n[gold]Held[/gold]: Take !D! damage.",
+  "AJAMATRUTHSEEKER-LANGUID_LASH.title": "Languid Lash",
+  "AJAMATRUTHSEEKER-LANGUID_LASH.description": "#Deal !D! damage.\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Draw Pile[/gold]."
 }

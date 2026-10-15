@@ -1,4 +1,6 @@
-﻿using BaseLib.Abstracts;
+﻿using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips;
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
 using AjamaTruthseeker.AjamaTruthseekerCode.Character;
@@ -16,7 +18,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
@@ -62,137 +66,250 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     /// If the Defy effect already handles its movement to its destination pile, such as AutoPlay, this should be null.
     public virtual PileType? DestinationPileAfterDefy => PileType.Discard;
 
-    public virtual IEnumerable<IHoverTip> MyHoverTips => [];
+    public virtual BundledHoverTipManager MyBundles => [];
+    public virtual List<List<string>> BundleReorders => [];
+    
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
+        // get
+        // {
+            // IEnumerable<IHoverTip> start = [];
+            // IEnumerable<IHoverTip> beforeMiddle = [];
+            // IEnumerable<IHoverTip> middle = [..MyHoverTips];
+            // IEnumerable<IHoverTip> afterMiddle = [];
+            // IEnumerable<IHoverTip> end = [];
+            //
+            // #region Start
+            //
+            // if (Keywords.Contains(MyEnums.Obscured))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(MyEnums.Obscured), HoverTipFactory.FromPower<ForesightPower>()];
+            // }
+            //
+            // if (Keywords.Contains(CardKeyword.Unplayable))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Unplayable)];
+            // }
+            //
+            // if (Keywords.Contains(CardKeyword.Innate))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Innate)];
+            // }
+            //
+            // if (Keywords.Contains(CardKeyword.Retain))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Retain)];
+            // }
+            //
+            // if (Keywords.Contains(CardKeyword.Sly))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Sly)];
+            // }
+            //
+            // if (Keywords.Contains(CardKeyword.Ethereal))
+            // {
+            //     start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Ethereal)];
+            // }
+            //
+            // #endregion
+            //
+            // #region Before Middle
+            //
+            // if (GainsBlock)
+            // {
+            //     beforeMiddle = [..beforeMiddle, HoverTipFactory.Static(StaticHoverTip.Block)];
+            // }
+            //
+            // #endregion
+            //
+            // #region After Middle
+            //
+            // if (HasRewrite)
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Rewrite), HoverTipFactory.FromPower<ForesightPower>()];
+            // }
+            //
+            // if (DynamicVars.Values.Any(dv => dv is ObscureVar { SkipTooltip: false }))
+            // {
+            //     afterMiddle =
+            //     [
+            //         ..afterMiddle,
+            //         HoverTipFactory.Static(MyEnums.Obscure),
+            //         HoverTipFactory.FromKeyword(MyEnums.Obscured),
+            //         HoverTipFactory.FromPower<ForesightPower>()
+            //     ];
+            // }
+            //
+            // if (DynamicVars.Values.Any(dv => dv is ProveVar { SkipTooltip: false }))
+            // {
+            //     afterMiddle =
+            //     [
+            //         ..afterMiddle,
+            //         HoverTipFactory.Static(MyEnums.Prove),
+            //         HoverTipFactory.FromPower<ForesightPower>(),
+            //         HoverTipFactory.FromKeyword(MyEnums.Obscured)
+            //     ];
+            // }
+            //
+            // if (DynamicVars.Values.Any(dv => dv is CertifyVar { SkipTooltip: false }))
+            // {
+            //     afterMiddle =
+            //     [
+            //         ..afterMiddle,
+            //         HoverTipFactory.Static(MyEnums.Certify),
+            //         HoverTipFactory.FromPower<ForesightPower>(),
+            //         HoverTipFactory.FromKeyword(MyEnums.Obscured)
+            //     ];
+            // }
+            //
+            // if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.FromPower<ForesightPower>()];
+            // }
+            //
+            // if (HasDrawnEffect)
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Drawn)];
+            // }
+            //
+            // if (HasForeseenEffect)
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Foreseen), HoverTipFactory.FromPower<ForesightPower>()];
+            // }
+            //
+            // if (HasDefyEffect)
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Defy)];
+            // }
+            //
+            // if (HasHeldEffect)
+            // {
+            //     afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Held)];
+            // }
+            //
+            // #endregion
+            //
+            // #region End
+            //
+            // if (Keywords.Contains(CardKeyword.Exhaust))
+            // {
+            //     end = [..end, HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+            // }
+            //
+            // #endregion
+            //
+            // return [..start, ..beforeMiddle, ..middle, ..afterMiddle, ..end];
+        // }
+        
         get
         {
-            IEnumerable<IHoverTip> start = [];
-            IEnumerable<IHoverTip> beforeMiddle = [];
-            IEnumerable<IHoverTip> middle = [..MyHoverTips];
-            IEnumerable<IHoverTip> afterMiddle = [];
-            IEnumerable<IHoverTip> end = [];
+            BundledHoverTipManager bundles = [];
 
-            #region Start
+            #region Automatic Bundles
+            
+            foreach (var keyword in ((IEnumerable<CardKeyword>) CardKeywordOrder.beforeDescription).Reverse())
+            {
+                if (Keywords.Contains(keyword))
+                {
+                    if (keyword == MyEnums.Obscured)
+                    {
+                        bundles.Add(new ObscuredBundle());
+                        continue;
+                    }
+                    
+                    bundles.Add(new BundledHoverTip(
+                        keyword.GetTitle().GetRawText(),
+                        HoverTipFactory.FromKeyword(keyword),
+                        BundledHoverTipManager.Category.Start
+                    ));
 
-            if (Keywords.Contains(MyEnums.Obscured))
-            {
-                start = [..start, HoverTipFactory.FromKeyword(MyEnums.Obscured), HoverTipFactory.FromPower<ForesightPower>()];
+                    if (keyword == CardKeyword.Ethereal && !Keywords.Contains(CardKeyword.Exhaust))
+                    {
+                        bundles.Add(new BundledHoverTip(
+                            CardKeyword.Exhaust.GetTitle().GetRawText(),
+                            HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+                            BundledHoverTipManager.Category.Start
+                        ));
+                    }
+                }
             }
             
-            if (Keywords.Contains(CardKeyword.Unplayable))
+            foreach (var keyword in CardKeywordOrder.afterDescription)
             {
-                start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Unplayable)];
+                if (Keywords.Contains(keyword))
+                {
+                    bundles.Add(new BundledHoverTip(
+                        keyword.GetTitle().GetRawText(),
+                        HoverTipFactory.FromKeyword(keyword),
+                        BundledHoverTipManager.Category.End
+                    ));
+                }
             }
-            
-            if (Keywords.Contains(CardKeyword.Innate))
-            {
-                start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Innate)];
-            }
-            
-            if (Keywords.Contains(CardKeyword.Retain))
-            {
-                start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Retain)];
-            }
-            
-            if (Keywords.Contains(CardKeyword.Sly))
-            {
-                start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Sly)];
-            }
-            
-            if (Keywords.Contains(CardKeyword.Ethereal))
-            {
-                start = [..start, HoverTipFactory.FromKeyword(CardKeyword.Ethereal)];
-            }
-
-            #endregion
-            
-            #region Before Middle
 
             if (GainsBlock)
             {
-                beforeMiddle = [..beforeMiddle, HoverTipFactory.Static(StaticHoverTip.Block)];
+                bundles.Add(BundledHoverTipFactory.Static(StaticHoverTip.Block));
             }
-
-            #endregion
-            
-            #region After Middle
             
             if (HasRewrite)
             {
-                afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Rewrite), HoverTipFactory.FromPower<ForesightPower>()];
+                bundles.Add(BundledHoverTipFactory.Static(MyEnums.Rewrite));
             }
 
+            if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
+            {
+                bundles.Add(BundledHoverTipFactory.FromPower<ForesightPower>());
+            }
+            
             if (DynamicVars.Values.Any(dv => dv is ObscureVar { SkipTooltip: false }))
             {
-                afterMiddle =
-                [
-                    ..afterMiddle,
-                    HoverTipFactory.Static(MyEnums.Obscure),
-                    HoverTipFactory.FromKeyword(MyEnums.Obscured),
-                    HoverTipFactory.FromPower<ForesightPower>()
-                ];
+                bundles.Add(new ObscureBundle());
             }
             
             if (DynamicVars.Values.Any(dv => dv is ProveVar { SkipTooltip: false }))
             {
-                afterMiddle =
-                [
-                    ..afterMiddle,
-                    HoverTipFactory.Static(MyEnums.Prove),
-                    HoverTipFactory.FromPower<ForesightPower>(),
-                    HoverTipFactory.FromKeyword(MyEnums.Obscured)
-                ];
+                bundles.Add(new ProveBundle());
             }
             
             if (DynamicVars.Values.Any(dv => dv is CertifyVar { SkipTooltip: false }))
             {
-                afterMiddle =
-                [
-                    ..afterMiddle,
-                    HoverTipFactory.Static(MyEnums.Certify),
-                    HoverTipFactory.FromPower<ForesightPower>(),
-                    HoverTipFactory.FromKeyword(MyEnums.Obscured)
-                ];
+                bundles.Add(new CertifyBundle());
             }
-            
-            if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
-            {
-                afterMiddle = [..afterMiddle, HoverTipFactory.FromPower<ForesightPower>()];
-            }
-            
+
             if (HasDrawnEffect)
             {
-                afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Drawn)];
+                bundles.Add(BundledHoverTipFactory.Static(MyEnums.Drawn));
             }
-            
+
             if (HasForeseenEffect)
             {
-                afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Foreseen), HoverTipFactory.FromPower<ForesightPower>()];
+                bundles.Add(new ForeseenBundle());
             }
             
             if (HasDefyEffect)
             {
-                afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Defy)];
+                bundles.Add(BundledHoverTipFactory.Static(MyEnums.Defy));
             }
             
             if (HasHeldEffect)
             {
-                afterMiddle = [..afterMiddle, HoverTipFactory.Static(MyEnums.Held)];
+                bundles.Add(BundledHoverTipFactory.Static(MyEnums.Held));
             }
-
+            
             #endregion
 
-            #region End
-
-            if (Keywords.Contains(CardKeyword.Exhaust))
+            foreach (var bundle in MyBundles)
             {
-                end = [..end, HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+                bundles.Add(bundle);
             }
 
-            #endregion
-
-            return [..start, ..beforeMiddle, ..middle, ..afterMiddle, ..end];
+            foreach (var list in BundleReorders)
+            {
+                bundles.Reorder(list[0], list.Skip(1).ToArray());
+            }
+            
+            bundles.SortHoverTips();
+            return bundles.GetHoverTips();
         }
     }
 

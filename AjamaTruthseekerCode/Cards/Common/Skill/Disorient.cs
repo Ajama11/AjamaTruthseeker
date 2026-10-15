@@ -1,3 +1,4 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
@@ -35,9 +36,17 @@ public class Disorient() : AjamaTruthseekerCard(1,
         CardKeyword.Exhaust
     ];
 
-    public override IEnumerable<IHoverTip> MyHoverTips =>
+    public override BundledHoverTipManager MyBundles =>
     [
-        HoverTipFactory.FromPower<WeakPower>()
+        BundledHoverTipFactory.FromPower<WeakPower>()
+    ];
+    
+    public override List<List<string>> BundleReorders =>
+    [
+        [
+            BundledHoverTipFactory.FromPower<WeakPower>().Name,
+            BundledHoverTipFactory.Static(MyEnums.Defy).Name
+        ]
     ];
 
     protected override async Task OnPlay(

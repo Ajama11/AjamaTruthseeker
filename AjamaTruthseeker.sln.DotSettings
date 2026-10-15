@@ -40,7 +40,8 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Text/@EntryValue">using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Text/@EntryValue">using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using BaseLib.Extensions;
@@ -71,7 +72,7 @@ public class $CLASS$() : AjamaTruthseeker.AjamaTruthseekerCode.Cards.AjamaTruths
         
     ];
     
-    public override IEnumerable&lt;IHoverTip&gt; MyHoverTips =&gt; 
+    public override BundledHoverTipManager MyBundles =&gt;
     [
         
     ];

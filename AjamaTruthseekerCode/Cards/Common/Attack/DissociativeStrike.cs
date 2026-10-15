@@ -1,3 +1,5 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips;
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
@@ -28,6 +30,14 @@ public class DissociativeStrike() : AjamaTruthseekerCard(1,
     protected override HashSet<CardTag> CanonicalTags =>
     [
         CardTag.Strike
+    ];
+    
+    public override List<List<string>> BundleReorders =>
+    [
+        [
+            BundledHoverTipFactory.Static(MyEnums.Defy).Name,
+            new ProveBundle().Name
+        ]
     ];
 
     protected override async Task OnPlay(

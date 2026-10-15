@@ -52,7 +52,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.ValueProps;
-using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
 
 namespace $NAMESPACE$;
 
@@ -63,11 +62,6 @@ public class $CLASS$() : AjamaTruthseeker.AjamaTruthseekerCode.Cards.AjamaTruths
     ];
     
     public override List&lt;NonDynamicEffect&gt; MyNonDynamicEffects =&gt;
-    [
-        
-    ];
-    
-    public override List&lt;Shape.ShapeType&gt; MyShapeEffects =&gt;
     [
         
     ];

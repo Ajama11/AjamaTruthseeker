@@ -37,21 +37,6 @@ public class MyEnums
     public static StaticHoverTip Held;
     
     [CustomEnum]
-    public static StaticHoverTip WeaponShape;
-    [CustomEnum]
-    public static StaticHoverTip WeaponRequired;
-    
-    [CustomEnum]
-    public static StaticHoverTip FriendShape;
-    [CustomEnum]
-    public static StaticHoverTip FriendRequired;
-    
-    [CustomEnum]
-    public static StaticHoverTip AbstractShape;
-    [CustomEnum]
-    public static StaticHoverTip AbstractRequired;
-
-    [CustomEnum]
     public static CardPilePosition RandomOutsideForesight;
     
     public enum PositionForesight

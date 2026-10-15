@@ -50,15 +50,12 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     }
     
     public virtual List<NonDynamicEffect> MyNonDynamicEffects => [];
-    
-    public virtual List<Shape.ShapeType> MyShapeEffects => [];
 
     public bool HasRewrite => MyNonDynamicEffects.Contains(NonDynamicEffect.Rewrite);
     public bool HasDrawnEffect => MyNonDynamicEffects.Contains(NonDynamicEffect.Drawn);
     public virtual bool HasForeseenEffect => this is IOnForeseenThis;
     public virtual bool HasDefyEffect => this is IOnDefyThis;
     public bool HasHeldEffect => MyNonDynamicEffects.Contains(NonDynamicEffect.Held);
-    public bool HasShapeEffect => MyShapeEffects.Count != 0;
 
     public override bool HasTurnEndInHandEffect => HasHeldEffect;
     
@@ -162,14 +159,6 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
             if (DynamicVars.Values.Any(dv => dv is ForesightVar { SkipTooltip: false }))
             {
                 afterMiddle = [..afterMiddle, HoverTipFactory.FromPower<ForesightPower>()];
-            }
-
-            if (HasShapeEffect)
-            {
-                foreach (var shapeType in MyShapeEffects)
-                {
-                    afterMiddle = [..afterMiddle, ..Shape.GetHoverTips(shapeType)];
-                }
             }
             
             if (HasDrawnEffect)
@@ -344,22 +333,5 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     public virtual Task OnDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         return Task.CompletedTask;
-    }
-    
-    public async Task DoShapeEffect(Shape.ShapeType shapeType, PlayerChoiceContext choiceContext, Func<Task> effect)
-    {
-        ShapedPower? shapedPower = Owner.Creature.GetPower<ShapedPower>();
-
-        if (shapedPower != null && shapedPower.IsShape(shapeType))
-        {
-            await effect();
-        }
-        else
-        {
-            if (!Shape.IsRequired(shapeType))
-            {
-                await Shape.SetShape(Owner.Creature, shapeType, choiceContext);
-            }
-        }
     }
 }

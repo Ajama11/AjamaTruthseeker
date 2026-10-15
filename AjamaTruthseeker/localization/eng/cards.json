@@ -8,9 +8,9 @@
   "AJAMATRUTHSEEKER-PARADOXICAL_EXTEND.title": "Paradoxical Extend",
   "AJAMATRUTHSEEKER-PARADOXICAL_EXTEND.description": "#Gain !B! [gold]Block[/gold].\n[gold]Foreseen[/gold]: Gain !ForesightPower! [gold]Foresight[/gold].",
   "AJAMATRUTHSEEKER-TIME_LOSS.title": "Time Loss",
-  "AJAMATRUTHSEEKER-TIME_LOSS.description": "#[gold]Friend Shaped[/gold]: Gain [E?].\n[gold]Foreseen[/gold]: Draw !C! card(s).",
+  "AJAMATRUTHSEEKER-TIME_LOSS.description": "#Put this card into your [gold]Draw Pile[/gold].\n[gold]Foreseen[/gold]: Gain [E?].",
   "AJAMATRUTHSEEKER-DISORIENT.title": "Disorient",
-  "AJAMATRUTHSEEKER-DISORIENT.description": "#[gold]Abstract Shape[/gold]: Apply !WeakPower! [gold]Weak[/gold].\n[gold]Defy[/gold]: Put this card into your [gold]Hand[/gold] next turn.",
+  "AJAMATRUTHSEEKER-DISORIENT.description": "#Apply !WeakPower! [gold]Weak[/gold].\n[gold]Defy[/gold]: Put this card into your [gold]Hand[/gold] next turn.",
   "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.title": "",
   "AJAMATRUTHSEEKER-AJAMA_TRUTHSEEKER_CARD.description": ""
 }

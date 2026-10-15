@@ -17,25 +17,22 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Skill;
 
 public class Disorient() : AjamaTruthseekerCard(1,
     CardType.Skill, CardRarity.Common,
-    TargetType.None),
+    TargetType.AnyEnemy),
     IOnDefyThis
 {
-    public override TargetType TargetType => IsAbstractShaped ? TargetType.AnyEnemy : TargetType.None;
-    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<WeakPower>(1)
+        new PowerVar<WeakPower>(2)
     ];
 
-    public override List<ShapeType> MyShapeEffects =>
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
-        ShapeType.Abstract
+        CardKeyword.Exhaust
     ];
 
     public override IEnumerable<IHoverTip> MyHoverTips =>
@@ -47,21 +44,9 @@ public class Disorient() : AjamaTruthseekerCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await DoShapeEffect(ShapeType.Abstract, choiceContext, async () =>
-            await CommonActions.Apply<WeakPower>(choiceContext, this, play));
-    }
-    
-    private bool IsAbstractShaped
-    {
-        get
-        {
-            if (!IsMutable) return false;
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-            if (Owner == null) return false;
-            
-            ShapedPower? shapedPower = Owner.Creature.GetPower<ShapedPower>();
-            return shapedPower != null && shapedPower.IsShape(ShapeType.Abstract);
-        }
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        
+        await CommonActions.Apply<WeakPower>(choiceContext, this, play);
     }
     
     public Task OnDefy(CardModel card, PlayerChoiceContext choiceContext)

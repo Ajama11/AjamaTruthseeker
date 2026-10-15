@@ -16,20 +16,14 @@ using static AjamaTruthseeker.AjamaTruthseekerCode.Utils.Shape;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Common.Skill;
 
-public class TimeLoss() : AjamaTruthseekerCard(0,
+public class TimeLoss() : AjamaTruthseekerCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self),
     IOnForeseenThis
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new EnergyVar(1),
-        new CardsVar(1)
-    ];
-
-    public override List<ShapeType> MyShapeEffects =>
-    [
-        ShapeType.Friend
+        new EnergyVar(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -41,17 +35,16 @@ public class TimeLoss() : AjamaTruthseekerCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await DoShapeEffect(ShapeType.Friend, choiceContext, async () =>
-            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner));
+        await CardPileCmd.Add(this, PileType.Draw, MyEnums.RandomOutsideForesight);
     }
     
     public async Task OnForeseen(PlayerChoiceContext choiceContext)
     {
-        await CommonActions.Draw(this, choiceContext);
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

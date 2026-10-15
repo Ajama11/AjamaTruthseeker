@@ -42,6 +42,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     private readonly Vector2 _previewPosition = new (65, 910);
     
     public static readonly SpireField<CardModel, bool> ForeseenThisDeckCycle = new(() => false);
+    public static readonly SpireField<PlayerCombatState, int> NumberOfObscuredCardsInForesight = new(() => 0);
 
     public async Task RunScopeAfterRoomEntered(AbstractRoom room)
     {
@@ -108,7 +109,11 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
 
     private async Task HandleForesightContentsPotentiallyChanged(Player player, CardPile drawPile)
     {
+        if (player.PlayerCombatState == null) return;
+        
         int foresightAmount = player.Creature.GetPowerAmount<ForesightPower>();
+        
+        NumberOfObscuredCardsInForesight[player.PlayerCombatState] = 0;
         
         if (LocalContext.IsMe(player))
         {
@@ -118,6 +123,9 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         for (var i = 0; i < Math.Min(drawPile.Cards.Count, foresightAmount); i++)
         {
             var card = drawPile.Cards[i];
+
+            if (card.Keywords.Contains(MyEnums.Obscured))
+                NumberOfObscuredCardsInForesight[player.PlayerCombatState]++;
 
             if (ForeseenThisDeckCycle[card]) continue;
             

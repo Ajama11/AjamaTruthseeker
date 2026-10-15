@@ -20,7 +20,6 @@ public partial class NObscuredCount : Control
 		
 		if (RunManager.Instance.State != null)
 			_localPlayer = LocalContext.GetMe(RunManager.Instance.State.Players);
-		_combatState = _localPlayer?.PlayerCombatState;
 
 		ForesightSingleton.NumberOfObscuredCardsInForesightChanged += OnObscuredNumberChanged;
 
@@ -29,11 +28,7 @@ public partial class NObscuredCount : Control
 
 	private void OnObscuredNumberChanged()
 	{
-		if (!_label.IsValid())
-		{
-			ForesightSingleton.NumberOfObscuredCardsInForesightChanged -= OnObscuredNumberChanged;
-			return;
-		}
+		if (!_label.IsValid()) return;
 		
 		_combatState ??= _localPlayer?.PlayerCombatState;
 		if (_combatState == null) return;
@@ -43,5 +38,10 @@ public partial class NObscuredCount : Control
 		_label!.SetTextAutoSize(number.ToString());
 
 		Visible = number > 0;
+	}
+
+	public override void _ExitTree()
+	{
+		ForesightSingleton.NumberOfObscuredCardsInForesightChanged -= OnObscuredNumberChanged;
 	}
 }

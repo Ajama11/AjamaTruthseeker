@@ -14,12 +14,20 @@ public class Proven
         new SavedSpireField<CardModel, bool>(() => false, "AjamaTruthseekerProven")
             .CopyOnClone();
 
+    public static readonly AddedNode<NCard, NTruthseekerProven> ProvenNode = new(
+        "res://AjamaTruthseeker/scenes/proven_checkmark.tscn",
+        (card, display) =>
+        {
+            display.Visible = IsProven(card.Model);
+            
+            var cardContainer = card.GetChild(0)!;
+            cardContainer.AddChild(display);
+        }
+    );
+
     public static void UpdateProven(NCard nCard)
     {
-        if (IsProven(nCard.Model) && nCard._titleLabel.IsValid())
-        {
-            nCard._titleLabel.SetTextAutoSize($"✅{nCard._titleLabel.Text}");
-        }
+        ProvenNode[nCard].Visible = IsProven(nCard.Model);
     }
 
     public static void SetProven(List<CardModel> cards, bool value)

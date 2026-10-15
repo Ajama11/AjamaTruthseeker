@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Basic;
+using BaseLib.Abstracts;
 using BaseLib.Utils.NodeFactories;
 using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using AjamaTruthseeker.AjamaTruthseekerCode.Relics;
@@ -20,7 +21,7 @@ public class Truthseeker : PlaceholderCharacterModel
 
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Neutral;
-    public override int StartingHp => 70;
+    public override int StartingHp => 75;
 
     public override IEnumerable<CardModel> StartingDeck =>
     [
@@ -28,12 +29,12 @@ public class Truthseeker : PlaceholderCharacterModel
         ModelDb.Card<StrikeIronclad>(),
         ModelDb.Card<StrikeIronclad>(),
         ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
         ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>()
+        ModelDb.Card<FutureQuestions>(),
+        ModelDb.Card<PresentAnswers>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>

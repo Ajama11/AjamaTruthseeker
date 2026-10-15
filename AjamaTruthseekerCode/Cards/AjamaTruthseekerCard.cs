@@ -61,6 +61,9 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
     public bool HasShapeEffect => MyShapeEffects.Count != 0;
 
     public override bool HasTurnEndInHandEffect => HasHeldEffect;
+    
+    /// If the Defy effect already handles its movement to its destination pile, such as AutoPlay, this should be null.
+    public virtual PileType? DestinationPileAfterDefy => PileType.Discard;
 
     public virtual IEnumerable<IHoverTip> MyHoverTips => [];
     protected override IEnumerable<IHoverTip> ExtraHoverTips
@@ -216,7 +219,8 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
 
         await thisDefy.OnDefy(this, choiceContext);
 
-        await CardPileCmd.Add(this, PileType.Discard.GetPile(Owner));
+        if (DestinationPileAfterDefy != null)
+            await CardPileCmd.Add(this, DestinationPileAfterDefy.Value.GetPile(Owner));
 
         await MyHooks.OnDefyActivated(card.CombatState!, choiceContext, this);
     }

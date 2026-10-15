@@ -1,5 +1,6 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
+using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using BaseLib.Abstracts;
@@ -20,22 +21,14 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Basic;
 public class PresentAnswers() : AjamaTruthseekerCard(1,
     CardType.Attack, CardRarity.Basic,
     TargetType.AnyEnemy),
-    ITranscendenceCard
+    IOnDefyThis, ITranscendenceCard
 {
+    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<DontCrashAncientOrobas>();
+    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5, DamageProps.card),
-        new RepeatVar(1)
-    ];
-
-    public override List<NonDynamicEffect> MyNonDynamicEffects =>
-    [
-        
-    ];
-
-    public override List<ShapeType> MyShapeEffects =>
-    [
-        ShapeType.Weapon
+        new DamageVar(4, DamageProps.card),
+        new RepeatVar(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -43,33 +36,26 @@ public class PresentAnswers() : AjamaTruthseekerCard(1,
         MyEnums.Obscured
     ];
 
-    public override IEnumerable<IHoverTip> MyHoverTips =>
-    [
-
-    ];
-
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int hitCount = 1;
-        
-        await DoShapeEffect(ShapeType.WeaponRequired, choiceContext, () =>
-        {
-            hitCount += DynamicVars.Repeat.IntValue;
-            return Task.CompletedTask;
-        });
-
-        await CommonActions.CardAttack(this, play, hitCount)
+        await CommonActions.CardAttack(this, play,
+                DynamicVars.Repeat.IntValue,
+                vfx: null,
+                tmpSfx: null)
             .Execute(choiceContext);
-
-        await DoShapeEffect(ShapeType.Weapon, choiceContext, () => Task.CompletedTask);
     }
+    
+    public async Task OnDefy(CardModel card, PlayerChoiceContext choiceContext)
+    {
+        await CardCmd.AutoPlay(choiceContext, this, null);
+    }
+
+    public override PileType? DestinationPileAfterDefy => null;
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
     }
-
-    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<DontCrashAncientOrobas>();
 }

@@ -11,6 +11,7 @@ using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+using BaseLib.Audio;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -25,8 +26,11 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.TestSupport;
+using Timer = Godot.Timer;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 
@@ -276,6 +280,7 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
         NCard node = NCard.Create(card)!; 
         control.AddChildSafely(node); 
         node.UpdateVisuals(pileType, CardPreviewMode.Normal);
+        PlayForeseenSfx();
         
         TaskCompletionSource source = new TaskCompletionSource();
         
@@ -304,6 +309,33 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
                 source.SetResult(); 
             }
         }))).SetDelay(time);
+    }
+
+    private static Timer? ForeseenSfxCooldownTimer { get; set; }
+    private static void PlayForeseenSfx()
+    {
+        if ((ForeseenSfxCooldownTimer == null ||
+             !ForeseenSfxCooldownTimer.IsValid()) &&
+            NRun.Instance != null)
+        {
+            ForeseenSfxCooldownTimer = new Timer();
+            ForeseenSfxCooldownTimer.WaitTime = 0.05;
+            ForeseenSfxCooldownTimer.OneShot = true;
+            
+            NRun.Instance.GlobalUi.AddChildSafely(ForeseenSfxCooldownTimer);
+        }
+
+        if (ForeseenSfxCooldownTimer == null ||
+            !ForeseenSfxCooldownTimer.IsValid())
+        {
+            // Something went wrong with adding the timer?
+            return;
+        }
+        
+        if (!ForeseenSfxCooldownTimer.IsStopped()) return;
+        
+        MySounds.PlayRandom(MySounds.ForeseenSounds, pitchVariation: 0.12f);
+        ForeseenSfxCooldownTimer.Start();
     }
     
     #endregion

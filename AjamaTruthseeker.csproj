@@ -71,7 +71,6 @@
         <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Attack\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Power\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Uncommon\Skill\" />
-        <Folder Include="AjamaTruthseeker\audio\" />
         <Folder Include="AjamaTruthseeker\images\card_portraits\big\"/>
         <Folder Include="AjamaTruthseeker\images\powers\big\"/>
         <Folder Include="AjamaTruthseeker\images\relics\big\"/>

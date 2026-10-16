@@ -146,15 +146,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         for (var i = 0; i < MaxPreviewCards; i++)
         {
             var yOffset = i * PreviewSpacingY;
-            var holder = CreatePreviewCard(ModelDb.Card<StrikeIronclad>(), i, yOffset, PreviewDefaultScale, holderParent);
-            if (holder == null) continue;
-            
-            _previewHolders.Add(holder);
-            _previewFocus.Add(i, false);
-            
-            holder.Focused += OnHolderFocused;
-            holder.Unfocused += OnHolderUnfocused;
-            holder.TreeExiting += RemoveCardPreviews;
+            CreatePreviewCard(ModelDb.Card<StrikeIronclad>(), i, yOffset, PreviewDefaultScale, holderParent);
         }
     }
 
@@ -166,10 +158,10 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         }
     }
 
-    private ForesightNPreviewCardHolder? CreatePreviewCard(CardModel card, int index, float yOffset, float scale, Control parent)
+    private void CreatePreviewCard(CardModel card, int index, float yOffset, float scale, Control parent)
     {
         var cardNode = NCard.Create(card);
-        if (cardNode == null) return null;
+        if (cardNode == null) return;
 
         ForesightNPreviewCardHolder holder =
             ForesightNPreviewCardHolder.ForesightCreate(cardNode, true, true);
@@ -192,8 +184,13 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         holder.Hitbox.Position = holder.Hitbox.Position with {X = holder.Hitbox.Position.X - 200};
         
         cardNode.UpdateVisuals(PileType.Draw, CardPreviewMode.Normal);
-
-        return holder;
+        
+        holder.Focused += OnHolderFocused;
+        holder.Unfocused += OnHolderUnfocused;
+        holder.TreeExiting += RemoveCardPreviews;
+        
+        _previewHolders.Add(holder);
+        _previewFocus.Add(index, false);
     }
 
     private void UpdateCardPreviews(CardPile drawPile, int foresightAmount)

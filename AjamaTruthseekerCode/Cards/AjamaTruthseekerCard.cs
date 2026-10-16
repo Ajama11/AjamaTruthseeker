@@ -156,6 +156,14 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
                 bundles.Add(BundledHoverTipFactory.FromCard<Nihility>());
             }
 
+            foreach (var myPowerVar in DynamicVars.Values.OfType<IPowerHoverTip>())
+            {
+                var powerHoverTip = myPowerVar.GetPowerHoverTip();
+                if (powerHoverTip.SkipTooltip) continue;
+                
+                bundles.Add(new BundledHoverTip(powerHoverTip.Name, powerHoverTip.HoverTip));
+            }
+
             if (HasDrawnEffect)
             {
                 bundles.Add(BundledHoverTipFactory.Static(MyEnums.Drawn));

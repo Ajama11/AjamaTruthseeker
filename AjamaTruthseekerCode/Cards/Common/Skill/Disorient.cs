@@ -28,25 +28,12 @@ public class Disorient() : AjamaTruthseekerCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<WeakPower>(2)
+        new MyPowerVar<WeakPower>(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         CardKeyword.Exhaust
-    ];
-
-    public override BundledHoverTipManager MyBundles =>
-    [
-        BundledHoverTipFactory.FromPower<WeakPower>()
-    ];
-    
-    public override List<List<string>> BundleReorders =>
-    [
-        [
-            BundledHoverTipFactory.FromPower<WeakPower>().Name,
-            BundledHoverTipFactory.Static(MyEnums.Defy).Name
-        ]
     ];
 
     protected override async Task OnPlay(

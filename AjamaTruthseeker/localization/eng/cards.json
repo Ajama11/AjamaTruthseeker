@@ -16,5 +16,9 @@
   "AJAMATRUTHSEEKER-NIHILITY.title": "Nihility",
   "AJAMATRUTHSEEKER-NIHILITY.description": "#[gold]Drawn[/gold]: Draw !C! card(s).\n[gold]Held[/gold]: Take !D! damage.",
   "AJAMATRUTHSEEKER-LANGUID_LASH.title": "Languid Lash",
-  "AJAMATRUTHSEEKER-LANGUID_LASH.description": "#Deal !D! damage.\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Draw Pile[/gold]."
+  "AJAMATRUTHSEEKER-LANGUID_LASH.description": "#Deal !D! damage.\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Draw Pile[/gold].",
+  "AJAMATRUTHSEEKER-TROLLEY_PROBLEM.title": "Trolley Problem",
+  "AJAMATRUTHSEEKER-TROLLEY_PROBLEM.description": "#Deal !D! damage.\n[gold]Held[/gold]: ALL enemies take !Held! damage.",
+  "AJAMATRUTHSEEKER-CONVENIENT_DESTINY.title": "Convenient Destiny",
+  "AJAMATRUTHSEEKER-CONVENIENT_DESTINY.description": "#Deal !D! damage.\n[gold]Rewrite[/gold].\nDraw !C! card(s)."
 }

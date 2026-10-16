@@ -323,4 +323,9 @@ public static class MyActions
             pile, position ?? MyEnums.RandomOutsideForesight,
             preview, previewTime, modifyCardsBeforePreview);
     }
+
+    public static async Task<IEnumerable<CardModel>> Draw(PlayerChoiceContext choiceContext, AjamaTruthseekerCard sourceCard)
+    {
+        return await CardPileCmd.Draw(choiceContext, sourceCard.DynamicVars.Cards.BaseValue, sourceCard.Owner);
+    }
 }

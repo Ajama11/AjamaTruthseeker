@@ -7,7 +7,9 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 
 public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
 {
-    protected override Vector2 HoverScale => _originalScale * 1.5f;
+    protected override Vector2 HoverScale => _originalScale * 1.66f;
+    private readonly Vector2 _focusOffset = new(44, 40);
+    
     private Tween? _positionTween;
 
     public int Index;
@@ -30,11 +32,12 @@ public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
     
     protected override void OnFocus()
     {
+        _positionTween?.Kill();
+        GlobalPosition = OriginalPosition + _focusOffset;
+        
+        // base.OnFocus() creates HoverTips based off of GlobalPosition, so it has to happen after we change GlobalPosition
         base.OnFocus();
         Focused?.Invoke(Index);
-        
-        _positionTween?.Kill();
-        GlobalPosition = OriginalPosition + new Vector2(36, 28);
     }
     
     protected override void OnUnfocus()

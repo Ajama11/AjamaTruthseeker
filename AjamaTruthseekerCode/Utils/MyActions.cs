@@ -306,10 +306,15 @@ public static class MyActions
         bool preview = true, float previewTime = 1.2f,
         Func<List<CardModel>, List<CardModel>>? modifyCardsBeforePreview = null)
     {
+        var positionToUse =
+            position ?? 
+            (pile == PileType.Draw ?
+                MyEnums.RandomOutsideForesight :
+                CardPilePosition.Bottom);
+
         await CreateCards(ModelDb.Card<Nihility>(),
             sourceCard.DynamicVars.Nihility.IntValue, sourceCard,
-            pile, position ?? MyEnums.RandomOutsideForesight,
-            preview, previewTime, modifyCardsBeforePreview);
+            pile, positionToUse, preview, previewTime, modifyCardsBeforePreview);
     }
     
     public static async Task CreateNihility(
@@ -318,14 +323,14 @@ public static class MyActions
         bool preview = true, float previewTime = 1.2f,
         Func<List<CardModel>, List<CardModel>>? modifyCardsBeforePreview = null)
     {
+        var positionToUse =
+            position ?? 
+            (pile == PileType.Draw ?
+                MyEnums.RandomOutsideForesight :
+                CardPilePosition.Bottom);
+        
         await CreateCards(ModelDb.Card<Nihility>(),
             amount, owner, combatState,
-            pile, position ?? MyEnums.RandomOutsideForesight,
-            preview, previewTime, modifyCardsBeforePreview);
-    }
-
-    public static async Task<IEnumerable<CardModel>> Draw(PlayerChoiceContext choiceContext, AjamaTruthseekerCard sourceCard)
-    {
-        return await CardPileCmd.Draw(choiceContext, sourceCard.DynamicVars.Cards.BaseValue, sourceCard.Owner);
+            pile, positionToUse, preview, previewTime, modifyCardsBeforePreview);
     }
 }

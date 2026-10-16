@@ -20,5 +20,9 @@
   "AJAMATRUTHSEEKER-TROLLEY_PROBLEM.title": "Trolley Problem",
   "AJAMATRUTHSEEKER-TROLLEY_PROBLEM.description": "#Deal !D! damage.\n[gold]Held[/gold]: ALL enemies take !Held! damage.",
   "AJAMATRUTHSEEKER-CONVENIENT_DESTINY.title": "Convenient Destiny",
-  "AJAMATRUTHSEEKER-CONVENIENT_DESTINY.description": "#Deal !D! damage.\n[gold]Rewrite[/gold].\nDraw !C! card(s)."
+  "AJAMATRUTHSEEKER-CONVENIENT_DESTINY.description": "#Deal !D! damage.\n[gold]Rewrite[/gold].\nDraw !C! card(s).",
+  "AJAMATRUTHSEEKER-ASCERTAIN.title": "Ascertain",
+  "AJAMATRUTHSEEKER-ASCERTAIN.description": "#Gain !B! [gold]Block[/gold].\n[gold]Prove[/gold] !Prove! card(s) in your [gold]Draw Pile[/gold].",
+  "AJAMATRUTHSEEKER-AVOIDANCE.title": "Avoidance",
+  "AJAMATRUTHSEEKER-AVOIDANCE.description": "#Gain !B! [gold]Block[/gold].\n[gold]Rewrite[/gold].\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Discard Pile[/gold]."
 }

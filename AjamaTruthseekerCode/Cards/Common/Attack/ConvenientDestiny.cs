@@ -41,8 +41,8 @@ public class ConvenientDestiny() : AjamaTruthseekerCard(1,
             .Execute(choiceContext);
 
         await MyActions.Rewrite(choiceContext, Owner);
-
-        await MyActions.Draw(choiceContext, this);
+        
+        await CommonActions.Draw(this, choiceContext);
     }
 
     protected override void OnUpgrade()

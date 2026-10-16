@@ -50,7 +50,7 @@ public class Nihility() : AjamaTruthseekerCard(1,
 
     public override async Task OnDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        await MyActions.Draw(choiceContext, this);
+        await CommonActions.Draw(this, choiceContext);
     }
 
     public override async Task OnHeld(PlayerChoiceContext choiceContext)

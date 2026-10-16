@@ -104,10 +104,11 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         if (player.PlayerCombatState == null) return;
         
         int foresightAmount = player.Creature.GetPowerAmount<ForesightPower>();
+        int visibleAmount = Math.Min(drawPile.Cards.Count, foresightAmount);
         
         NumberOfObscuredCardsInForesight[player.PlayerCombatState] = 0;
         
-        for (var i = 0; i < Math.Min(drawPile.Cards.Count, foresightAmount); i++)
+        for (var i = 0; i < visibleAmount; i++)
         {
             var card = drawPile.Cards[i];
 

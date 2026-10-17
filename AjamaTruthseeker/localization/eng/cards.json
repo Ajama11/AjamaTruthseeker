@@ -24,5 +24,9 @@
   "AJAMATRUTHSEEKER-ASCERTAIN.title": "Ascertain",
   "AJAMATRUTHSEEKER-ASCERTAIN.description": "#Gain !B! [gold]Block[/gold].\n[gold]Prove[/gold] !Prove! card(s) in your [gold]Draw Pile[/gold].",
   "AJAMATRUTHSEEKER-AVOIDANCE.title": "Avoidance",
-  "AJAMATRUTHSEEKER-AVOIDANCE.description": "#Gain !B! [gold]Block[/gold].\n[gold]Rewrite[/gold].\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Discard Pile[/gold]."
+  "AJAMATRUTHSEEKER-AVOIDANCE.description": "#Gain !B! [gold]Block[/gold].\n[gold]Rewrite[/gold].\nAdd !Nihility! [gold]Nihility[/gold] into your [gold]Discard Pile[/gold].",
+  "AJAMATRUTHSEEKER-ACCELERATE.title": "Accelerate",
+  "AJAMATRUTHSEEKER-ACCELERATE.description": "#[gold]Rewrite[/gold].\n[gold]Defy[/gold]: Draw !C! card(s).",
+  "AJAMATRUTHSEEKER-DENY_SELVES.title": "Deny Selves",
+  "AJAMATRUTHSEEKER-DENY_SELVES.description": "#Gain !B! [gold]Block[/gold].\n[gold]Obscure[/gold] ALL cards in your [gold]Hand[/gold]."
 }

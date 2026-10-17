@@ -17,7 +17,7 @@ public partial class NObscuredCount : Control
 	public override void _Ready()
 	{
 		_label = GetNode<MegaLabel>("InnerContainer/Label");
-		
+
 		if (RunManager.Instance.State != null)
 			_localPlayer = LocalContext.GetMe(RunManager.Instance.State.Players);
 
@@ -29,7 +29,7 @@ public partial class NObscuredCount : Control
 	private void OnObscuredNumberChanged()
 	{
 		if (!_label.IsValid()) return;
-		
+
 		_combatState ??= _localPlayer?.PlayerCombatState;
 		if (_combatState == null) return;
 

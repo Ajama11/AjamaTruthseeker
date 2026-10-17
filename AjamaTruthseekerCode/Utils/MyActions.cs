@@ -54,7 +54,7 @@ public static class MyActions
         }
 
         var prefs = new CardSelectorPrefs(
-            CardSelectorPrefs.DiscardSelectionPrompt,
+            MySelectionPrompts.Rewrite,
             0,
             cardsToRewrite.Count
         )

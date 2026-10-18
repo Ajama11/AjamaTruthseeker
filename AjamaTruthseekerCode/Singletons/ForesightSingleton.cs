@@ -147,7 +147,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         for (var i = 0; i < MaxPreviewCards; i++)
         {
             var yOffset = i * PreviewSpacingY;
-            CreatePreviewCard(ModelDb.Card<StrikeIronclad>(), i, yOffset, PreviewDefaultScale, holderParent);
+            CreatePreviewCard(ModelDb.Card<StrikeIronclad>(), i, player, yOffset, PreviewDefaultScale, holderParent);
         }
     }
 
@@ -159,7 +159,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         }
     }
 
-    private void CreatePreviewCard(CardModel card, int index, float yOffset, float scale, Control parent)
+    private void CreatePreviewCard(CardModel card, int index, Player player, float yOffset, float scale, Control parent)
     {
         var cardNode = NCard.Create(card);
         if (cardNode == null) return;
@@ -172,6 +172,7 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         
         holder.Visible = false;
         holder.Index = index;
+        holder.Player = player;
         
         holder.MouseFilter = Control.MouseFilterEnum.Ignore;
         holder.FocusMode = Control.FocusModeEnum.None;
@@ -257,4 +258,9 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         _previewHolders.Clear();
         _previewFocus.Clear();
     }
+
+    // public CardModel? GetRealCardFromHolder(ForesightNPreviewCardHolder holder)
+    // {
+    //     return holder.
+    // }
 }

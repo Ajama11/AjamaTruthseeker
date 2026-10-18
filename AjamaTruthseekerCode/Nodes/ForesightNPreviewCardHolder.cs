@@ -4,8 +4,11 @@ using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 
@@ -18,6 +21,7 @@ public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
 
     public int Index;
     public Vector2 OriginalPosition;
+    public Player Player = null!;
     
     public event Action<int>? Focused;
     public event Action<int>? Unfocused;
@@ -59,7 +63,9 @@ public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
     
     private static void OnPressed(NCardHolder cardHolder)
     {
-        MainFile.Logger.Warn($"{cardHolder.CardModel?.Title} was pressed");
-        // Proven.SetProven(cardHolder.CardModel!, true);
+        if (cardHolder is not ForesightNPreviewCardHolder foresightHolder) return;
+        
+        var action = new FlagCardAction(foresightHolder.Player, foresightHolder.Index);
+        RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(action);
     }
 }

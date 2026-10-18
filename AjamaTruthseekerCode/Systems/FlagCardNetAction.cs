@@ -7,10 +7,19 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Systems;
 
 public class FlagCardNetAction : INetAction
 {
-    public GameAction ToGameAction(Player player) => new FlagCardAction(player);
+    public int Index;
     
-    public void Serialize(PacketWriter writer) { }
-    public void Deserialize(PacketReader reader) { }
+    public GameAction ToGameAction(Player player) => new FlagCardAction(player, Index);
+
+    public void Serialize(PacketWriter writer)
+    {
+        writer.WriteInt(Index);
+    }
+
+    public void Deserialize(PacketReader reader)
+    {
+        Index = reader.ReadInt();
+    }
 
     public override string ToString() => nameof(FlagCardNetAction);
 }

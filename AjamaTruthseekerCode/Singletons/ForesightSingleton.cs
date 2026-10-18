@@ -258,9 +258,4 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         _previewHolders.Clear();
         _previewFocus.Clear();
     }
-
-    // public CardModel? GetRealCardFromHolder(ForesightNPreviewCardHolder holder)
-    // {
-    //     return holder.
-    // }
 }

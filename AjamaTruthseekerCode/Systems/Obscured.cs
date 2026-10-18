@@ -1,7 +1,8 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models;
 
-namespace AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+namespace AjamaTruthseeker.AjamaTruthseekerCode.Systems;
 
 public class Obscured
 {

@@ -1,5 +1,9 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
+using AjamaTruthseeker.AjamaTruthseekerCode.Systems;
+using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
 
@@ -27,9 +31,10 @@ public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
         ForesightNPreviewCardHolder newHolder = (InstanceFromId(godotObjectId) as ForesightNPreviewCardHolder)!;
         
         newHolder.Initialize(card, showHoverTips, scaleOnHover);
+        newHolder.Pressed += OnPressed;
         return newHolder;
     }
-    
+
     protected override void OnFocus()
     {
         _positionTween?.Kill();
@@ -50,5 +55,11 @@ public partial class ForesightNPreviewCardHolder : NPreviewCardHolder
         _positionTween.TweenProperty(this, "global_position", OriginalPosition, 0.5)
             .SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Expo);
+    }
+    
+    private static void OnPressed(NCardHolder cardHolder)
+    {
+        MainFile.Logger.Warn($"{cardHolder.CardModel?.Title} was pressed");
+        // Proven.SetProven(cardHolder.CardModel!, true);
     }
 }

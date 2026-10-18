@@ -1,11 +1,10 @@
-using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
+using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 
-namespace AjamaTruthseeker.AjamaTruthseekerCode.Utils;
+namespace AjamaTruthseeker.AjamaTruthseekerCode.Systems;
 
 public class Proven
 {

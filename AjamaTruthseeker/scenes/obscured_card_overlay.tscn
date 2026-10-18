@@ -1,8 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmqdyno37gi4"]
+[gd_scene load_steps=6 format=3 uid="uid://dmqdyno37gi4"]
 
 [ext_resource type="Texture2D" uid="uid://cxbfvos2gxrje" path="res://AjamaTruthseeker/images/ui/obscured_card_overlay.png" id="1_i66jb"]
+[ext_resource type="Shader" uid="uid://bgaqacugghbai" path="res://AjamaTruthseeker/shaders/obscured_card_overlay_smoke.gdshader" id="2_0ltb8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ltb8"]
+noise_type = 3
+frequency = 0.003
+fractal_gain = 0.75
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i0jo0"]
+noise = SubResource("FastNoiseLite_0ltb8")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0jo0"]
+shader = ExtResource("2_0ltb8")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_i0jo0")
+shader_parameter/smoke_color = Color(0.11804999, 0.073800005, 0.18, 1)
+shader_parameter/distortion_speed = 0.2
+shader_parameter/density = 1.0
 
 [node name="AjamaTruthseekerObscured" type="TextureRect"]
+clip_children = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,3 +31,13 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_i66jb")
 expand_mode = 2
+
+[node name="Smoke" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_i0jo0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -75,6 +75,7 @@
         <Folder Include="AjamaTruthseeker\images\powers\big\"/>
         <Folder Include="AjamaTruthseeker\images\relics\big\"/>
         <Folder Include="AjamaTruthseeker\scenes\" />
+        <Folder Include="AjamaTruthseeker\shaders\" />
     </ItemGroup>
 
     <ItemGroup>

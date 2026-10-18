@@ -1,4 +1,5 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
+using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Ancient;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
@@ -22,7 +23,7 @@ public class PresentAnswers() : AjamaTruthseekerCard(1,
     TargetType.AnyEnemy),
     IOnDefyThis, ITranscendenceCard
 {
-    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<DontCrashAncientOrobas>();
+    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<EverpresentTruths>();
     
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

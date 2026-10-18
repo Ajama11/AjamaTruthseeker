@@ -62,7 +62,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="AjamaTruthseekerCode\Cards\Ancient\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Multiplayer\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Rare\Attack\" />
         <Folder Include="AjamaTruthseekerCode\Cards\Rare\Power\" />

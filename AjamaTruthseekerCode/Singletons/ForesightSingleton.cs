@@ -1,4 +1,5 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
+using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
@@ -7,7 +8,9 @@ using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using Godot;
+using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -17,9 +20,13 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
 using Timer = Godot.Timer;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Singletons;
@@ -41,6 +48,8 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     private const float PreviewDefaultScale = 0.4f;
     private const float PreviewSpacingY = -19f;
     private readonly Vector2 _previewPosition = new (65, 910);
+
+    private const decimal WrongFlagHpLoss = 5;
     
     public static readonly SpireField<CardModel, bool> ForeseenThisDeckCycle = new(() => false);
     public static readonly SpireField<PlayerCombatState, int> NumberOfObscuredCardsInForesight = new(() => 0);
@@ -71,12 +80,45 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         if (player.PlayerCombatState!.TurnNumber != 1) await HandleForesightContentsPotentiallyChanged(player, player.PlayerCombatState!.DrawPile);
     }
 
-    public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+    public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
         if ((oldPileType == PileType.Draw && card.Pile?.Type != PileType.Draw) ||
             oldPileType == PileType.Play)
+        {
             ForeseenThisDeckCycle[card] = false;
-        return Task.CompletedTask;
+
+            if (Proven.IsFlagged(card))
+            {
+                if (card.Keywords.Contains(MyEnums.Obscured))
+                {
+                    Proven.SetProven(card, true);
+                    MySounds.PlayProve();
+                }
+                else
+                {
+                    Proven.SetFlag(card, false);
+                    
+                    VfxCmd.PlayOnCreatureCenter(card.Owner.Creature, VfxCmd.bloodyImpactPath);
+                    
+                    if (LocalContext.IsMe(card.Owner))
+                    {
+                        SfxCmd.PlayTmp(TmpSfx.hiss);
+                        
+                        NNightmareHandsVfx? hands = NNightmareHandsVfx.Create();
+                        hands?.Modulate = Colors.Red;
+
+                        NGame.Instance!.CurrentRunNode!.GlobalUi.AddChildSafely(hands);
+                        
+                        NGame.Instance.CurrentRunNode.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(new Color(0.8f, 0.3f, 0.3f, 0.66f), new Color(4f, 0f, 0f, 0.33f)));
+                    }
+                    
+                    await CreatureCmd.Damage(
+                        new ThrowingPlayerChoiceContext(), card.Owner.Creature, 
+                        WrongFlagHpLoss, DamageProps.nonCardHpLoss,
+                        null, null);
+                }
+            }
+        }
     }
     
     /// Update card previews whenever anyone plays a card, because of situations like Midnight updating its energy cost from another player's actions.

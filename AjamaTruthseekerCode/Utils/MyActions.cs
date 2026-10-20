@@ -256,7 +256,7 @@ public static class MyActions
         }
         
         Proven.SetProven(cards, true);
-        if (LocalContext.IsMe(player)) MySounds.Prove.Play();
+        if (LocalContext.IsMe(player)) MySounds.PlayProve();
     }
 
     public static void ProveRandom(Player player, int amount, List<PileType>? piles = null, MyEnums.PositionForesight positionForesight = MyEnums.PositionForesight.DontCare)
@@ -269,7 +269,7 @@ public static class MyActions
         
         Proven.SetProven(cards, true);
         CardCmd.Preview(cards);
-        if (LocalContext.IsMe(player)) MySounds.Prove.Play();
+        if (LocalContext.IsMe(player)) MySounds.PlayProve();
     }
 
     public static void Obscure(List<CardModel> cards, bool preview = true, bool playSfx = true)

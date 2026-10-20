@@ -35,7 +35,7 @@ public class UnnamedShopRelic() : AjamaTruthseekerRelic
         {
             Proven.SetProven(card, true);
             CardCmd.Preview(card);
-            MySounds.Prove.Play();
+            MySounds.PlayProve();
         }
     }
 }

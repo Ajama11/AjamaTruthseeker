@@ -214,6 +214,9 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
                     : Obscured.Disguise[drawPile.Cards[holder.Index]]!;
                 
                 holder.ReassignToCard(cardToDisplay, PileType.Draw, null, ModelVisibility.Visible);
+
+                Proven.FlagNode[holder].Flag?.Visible =
+                    Proven.IsFlagged(drawPile.Cards[holder.Index]);
             }
         }
     }

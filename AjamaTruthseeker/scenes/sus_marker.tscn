@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://pd50xxkaomjc"]
+
+[ext_resource type="Script" path="res://AjamaTruthseekerCode/Nodes/NSusMarker.cs" id="1_vqjb6"]
+[ext_resource type="Texture2D" uid="uid://r3v4j5xnlsfw" path="res://AjamaTruthseeker/images/ui/checkmark.png" id="2_8wgrb"]
+[ext_resource type="Texture2D" uid="uid://c17ljpiln0jqb" path="res://AjamaTruthseeker/images/ui/flag.png" id="3_6xle2"]
+
+[node name="AjamaTruthseekerSus" type="TextureRect"]
+offset_left = 109.0
+offset_top = -218.0
+offset_right = 157.0
+offset_bottom = -170.0
+mouse_filter = 2
+flip_v = true
+script = ExtResource("1_vqjb6")
+
+[node name="Checkmark" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("2_8wgrb")
+
+[node name="Flag" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("3_6xle2")

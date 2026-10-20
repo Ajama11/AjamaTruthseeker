@@ -28,11 +28,8 @@ public class FlagCardAction(Player player, int index) : GameAction
         if (_player.DrawPile.Count <= _index) return Task.CompletedTask;
         
         CardModel card = _player.DrawPile[_index];
-
-        if (!Proven.IsAbleToBeCertified(card)) return Task.CompletedTask;
         
-        Proven.SetProven(card, true);
-        MainFile.Logger.Warn($"{card.Title} at index {_index} has been Certified");
+        Proven.ToggleFlag(card);
 
         return Task.CompletedTask;
     }

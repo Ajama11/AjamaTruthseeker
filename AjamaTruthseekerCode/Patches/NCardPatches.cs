@@ -34,7 +34,7 @@ public static class NCardPatches
     [HarmonyPostfix]
     public static void UpdateVisualsPostfix(NCard __instance)
     {
-        Proven.UpdateProven(__instance);
+        Proven.UpdateCheckmark(__instance);
         
         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         TextureRect? obscuredNormalOverlay = __instance._frame?.GetNodeOrNull<TextureRect>("AjamaTruthseekerObscured");
@@ -53,6 +53,6 @@ public static class NCardPatches
     [HarmonyPostfix]
     public static void ReloadPostfix(NCard __instance)
     {
-        Proven.UpdateProven(__instance);
+        Proven.UpdateCheckmark(__instance);
     }
 }

@@ -52,7 +52,8 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     private const decimal WrongFlagHpLoss = 5;
     
     public static readonly SpireField<CardModel, bool> ForeseenThisDeckCycle = new(() => false);
-    public static readonly SpireField<PlayerCombatState, int> NumberOfObscuredCardsInForesight = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, int> NumberOfAllObscuredCardsInForesight = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, int> NumberOfHiddenObscuredCardsInForesight = new(() => 0);
 
     public static event Action? NumberOfObscuredCardsInForesightChanged;
 
@@ -149,14 +150,19 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
         int foresightAmount = player.Creature.GetPowerAmount<ForesightPower>();
         int visibleAmount = Math.Min(drawPile.Cards.Count, foresightAmount);
         
-        NumberOfObscuredCardsInForesight[player.PlayerCombatState] = 0;
+        NumberOfAllObscuredCardsInForesight[player.PlayerCombatState] = 0;
+        NumberOfHiddenObscuredCardsInForesight[player.PlayerCombatState] = 0;
         
         for (var i = 0; i < visibleAmount; i++)
         {
             var card = drawPile.Cards[i];
 
             if (card.Keywords.Contains(MyEnums.Obscured))
-                NumberOfObscuredCardsInForesight[player.PlayerCombatState]++;
+            {
+                NumberOfAllObscuredCardsInForesight[player.PlayerCombatState]++;
+                if (!Proven.IsProven(card))
+                    NumberOfHiddenObscuredCardsInForesight[player.PlayerCombatState]++;
+            }
 
             if (ForeseenThisDeckCycle[card]) continue;
             

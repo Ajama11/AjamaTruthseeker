@@ -33,7 +33,7 @@ public partial class NObscuredCount : Control
 		_combatState ??= _localPlayer?.PlayerCombatState;
 		if (_combatState == null) return;
 
-		int number = ForesightSingleton.NumberOfObscuredCardsInForesight[_combatState];
+		int number = ForesightSingleton.NumberOfHiddenObscuredCardsInForesight[_combatState];
 
 		_label!.SetTextAutoSize(number.ToString());
 

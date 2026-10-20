@@ -1,6 +1,7 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.Character;
 using AjamaTruthseeker.AjamaTruthseekerCode.Nodes;
 using AjamaTruthseeker.AjamaTruthseekerCode.Singletons;
+using AjamaTruthseeker.AjamaTruthseekerCode.Systems;
 using AjamaTruthseeker.AjamaTruthseekerCode.Utils;
 using Godot;
 using HarmonyLib;
@@ -53,9 +54,23 @@ public static class DrawPileObscuredCountPatches
         }
 
         LocString addition = new LocString("gameplay_ui", "AJAMATRUTHSEEKER-OBSCURED_COUNT");
+
+        int allObscuredVisible = ForesightSingleton.NumberOfAllObscuredCardsInForesight[combatState];
+        int allObscuredTotal = combatState.DrawPile.Cards
+            .Count(c => c.Keywords.Contains(MyEnums.Obscured));
+
+        int hiddenObscuredVisible = ForesightSingleton.NumberOfHiddenObscuredCardsInForesight[combatState];
+        int hiddenObscuredTotal = combatState.DrawPile.Cards
+            .Count(c => c.Keywords.Contains(MyEnums.Obscured) && !Proven.IsProven(c));
         
-        addition.Add("ObscuredVisible", ForesightSingleton.NumberOfObscuredCardsInForesight[combatState]);
-        addition.Add("ObscuredTotal", combatState.DrawPile.Cards.Count(c => c.Keywords.Contains(MyEnums.Obscured)));
+        addition.Add("AllObscuredVisible", allObscuredVisible);
+        addition.Add("AllObscuredTotal", allObscuredTotal);
+        
+        addition.Add("HiddenObscuredVisible", hiddenObscuredVisible);
+        addition.Add("HiddenObscuredTotal", hiddenObscuredTotal);
+        
+        addition.Add("DifferentVisible", allObscuredVisible != hiddenObscuredVisible);
+        addition.Add("DifferentTotal", allObscuredTotal != hiddenObscuredTotal);
         
         realHoverTip.Description += addition.GetFormattedText();
 

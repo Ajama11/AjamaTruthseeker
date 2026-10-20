@@ -46,8 +46,8 @@ public class ForesightSingleton() : CustomSingletonModel(HookType.Combat)
     
     public const int MaxPreviewCards = 10;
     private const float PreviewDefaultScale = 0.4f;
-    private const float PreviewSpacingY = -19f;
-    private readonly Vector2 _previewPosition = new (65, 910);
+    private const float PreviewSpacingY = -35f;
+    private readonly Vector2 _previewPosition = new (65, 915);
 
     private const decimal WrongFlagHpLoss = 5;
     

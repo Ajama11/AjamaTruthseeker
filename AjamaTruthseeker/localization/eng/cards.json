@@ -30,5 +30,9 @@
   "AJAMATRUTHSEEKER-DENY_SELVES.title": "Deny Selves",
   "AJAMATRUTHSEEKER-DENY_SELVES.description": "#Gain !B! [gold]Block[/gold].\n[gold]Obscure[/gold] ALL cards in your [gold]Hand[/gold].",
   "AJAMATRUTHSEEKER-EVERPRESENT_TRUTHS.title": "Everpresent Truths",
-  "AJAMATRUTHSEEKER-EVERPRESENT_TRUTHS.description": "#Deal !D! damage to ALL enemies !Repeat! times.\n[gold]Defy[/gold]: Play this card and put it into your [gold]Hand[/gold]."
+  "AJAMATRUTHSEEKER-EVERPRESENT_TRUTHS.description": "#Deal !D! damage to ALL enemies !Repeat! times.\n[gold]Defy[/gold]: Play this card and put it into your [gold]Hand[/gold].",
+  "AJAMATRUTHSEEKER-THEORY.title": "Theory",
+  "AJAMATRUTHSEEKER-THEORY.description": "",
+  "AJAMATRUTHSEEKER-TEST.title": "Test",
+  "AJAMATRUTHSEEKER-TEST.description": "#[gold]Theorize[/gold] \"Deal !D! damage\"."
 }

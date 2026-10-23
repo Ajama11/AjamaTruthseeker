@@ -1,0 +1,3 @@
+{
+  "AJAMATRUTHSEEKER-DAMAGE_THEORY.description": "#{HasSingle:Deal !Single! damage.|}{NewLineAfterSingle:\n|}{HasAoe:Deal !Aoe! damage to ALL enemies.|}{NewLineAfterAoe:\n|}{HasRandom:Deal !Random! damage to a random enemy.|}"
+}

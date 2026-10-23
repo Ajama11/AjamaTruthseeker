@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 
@@ -25,5 +26,7 @@ public static class PlayerExtensions
                 IsAlive: true, IsPlayer: true
             } && c.Player != player)
             .ToList() ?? [];
+
+        public RunRngSet Rng => player.RunState.Rng;
     }
 }

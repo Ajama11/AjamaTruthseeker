@@ -185,18 +185,10 @@ public abstract class AjamaTruthseekerCard(int cost, CardType type, CardRarity r
             }
             
             #endregion
-
-            foreach (var bundle in MyBundles)
-            {
-                bundles.Add(bundle);
-            }
-
-            foreach (var list in BundleReorders)
-            {
-                bundles.Reorder(list[0], list.Skip(1).ToArray());
-            }
             
-            bundles.SortHoverTips();
+            bundles.AddRange(MyBundles);
+            
+            bundles.SortHoverTips(BundleReorders);
             return bundles.GetHoverTips();
         }
     }

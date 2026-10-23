@@ -47,6 +47,8 @@ public class DamageTheory : AbstractTheoryMod
     {
         await using var attackContext = await AttackContext.CreateAsync(CombatState!, choiceContext, cardPlay);
 
+        await CreatureCmd.TriggerAnim(Player.Creature, "Attack", Player.Character.AttackAnimDelay);
+
         if (HasSingle)
         {
             var target = cardPlay.Target ?? Rng.CombatTargets.NextItem(CombatState!.HittableEnemies);

@@ -23,7 +23,7 @@ public class BundledHoverTipManager : List<BundledHoverTip>
         return list;
     }
 
-    public void Reorder(string anchor, params string[] otherBundles)
+    private void Reorder(string anchor, params string[] otherBundles)
     {
         var matchingAnchor = Find(
             b => b.Name == anchor
@@ -43,12 +43,18 @@ public class BundledHoverTipManager : List<BundledHoverTip>
 
             matchingPackage?.SortOrder = matchingAnchor.SortOrder + i + 1;
         }
-        
-        SortHoverTips();
     }
 
-    public void SortHoverTips()
+    public void SortHoverTips(List<List<string>>? reorders = null)
     {
+        if (reorders != null)
+        {
+            foreach (var reorder in reorders)
+            {
+                Reorder(reorder[0], reorder.Skip(1).ToArray());
+            }
+        }
+        
         Sort((x, y) => x.InternalSortOrder - y.InternalSortOrder);
     }
 }

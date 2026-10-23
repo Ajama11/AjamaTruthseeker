@@ -18,7 +18,7 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers;
 
 public class AbstractTheoryMod : CardModifier, ICustomModel
 {
-    public virtual BundledHoverTipManager MyTheoryBundles => [];
+    public virtual BundledHoverTipManager MyBundles => [];
     public virtual List<List<string>> BundleReorders => [];
     public virtual bool IsAttack => false;
     public virtual TargetType Targeting => TargetType.Self;
@@ -90,18 +90,10 @@ public class AbstractTheoryMod : CardModifier, ICustomModel
                 
                 bundles.Add(new BundledHoverTip(powerHoverTip.Name, powerHoverTip.HoverTip));
             }
+            
+            bundles.AddRange(MyBundles);
 
-            foreach (var bundle in MyTheoryBundles)
-            {
-                bundles.Add(bundle);
-            }
-
-            foreach (var list in BundleReorders)
-            {
-                bundles.Reorder(list[0], list.Skip(1).ToArray());
-            }
-
-            bundles.SortHoverTips();
+            bundles.SortHoverTips(BundleReorders);
             return bundles;
         }
     }

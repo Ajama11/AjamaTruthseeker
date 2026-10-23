@@ -31,21 +31,6 @@ public class Test() : AjamaTruthseekerCard(0,
         new DamageVar(1, DamageProps.card)
     ];
 
-    public override List<NonDynamicEffect> MyNonDynamicEffects =>
-    [
-
-    ];
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-    [
-
-    ];
-
-    public override BundledHoverTipManager MyBundles =>
-    [
-
-    ];
-
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -65,10 +50,5 @@ public class Test() : AjamaTruthseekerCard(0,
             
             theory.AddModifier<WeakTheory>();
         }
-    }
-
-    protected override void OnUpgrade()
-    {
-
     }
 }

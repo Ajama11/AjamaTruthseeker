@@ -121,7 +121,7 @@ public class DamageTheory : AbstractTheoryMod
 
     public static DamageTheory Create(decimal single = 0, decimal aoe = 0, decimal random = 0)
     {
-        var damage = (DamageTheory) ModelDb.CardModifier<DamageTheory>().MutableClone();
+        var damage = ModelDb.CardModifier<DamageTheory>().TypedMutableClone();
 
         damage.DynamicVars[Single].BaseValue += single;
         damage.DynamicVars[Aoe].BaseValue += aoe;

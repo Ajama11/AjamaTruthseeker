@@ -1,3 +1,5 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips;
+using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
 using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
@@ -21,6 +23,10 @@ public class DamageTheory : AbstractTheoryMod
     {
         Priority = -1;
     }
+    
+    public override bool IsAttack => true;
+    public override TargetType Targeting => HasSingle ?
+        TargetType.AnyEnemy : TargetType.AllEnemies;
 
     public const string Single = "Single";
     public const string Aoe = "Aoe";

@@ -1,4 +1,5 @@
 using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
@@ -20,27 +21,39 @@ namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Token;
 [Pool(typeof(TokenCardPool))]
 public class Theory() : AjamaTruthseekerCard(0,
     CardType.Skill, CardRarity.Token,
-    TargetType.None)
+    TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        
-    ];
+    public IEnumerable<AbstractTheoryMod> Modifiers =>
+        this.GetModifiers().OfType<AbstractTheoryMod>();
+    
+    public override CardType Type =>
+        Modifiers.OfType<DamageTheory>().Any() ? 
+            CardType.Attack : CardType.Skill;
 
-    public override List<NonDynamicEffect> MyNonDynamicEffects =>
-    [
-
-    ];
+    public override TargetType TargetType =>
+        Modifiers.Any(m => m.Targeting == TargetType.AnyEnemy) ? TargetType.AnyEnemy :
+        Modifiers.Any(m => m.Targeting == TargetType.AllEnemies) ? TargetType.AllEnemies :
+        TargetType.Self;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         CardKeyword.Exhaust
     ];
 
-    public override BundledHoverTipManager MyBundles =>
-    [
+    public override BundledHoverTipManager MyBundles
+    {
+        get
+        {
+            BundledHoverTipManager result = [];
+            
+            foreach (var modifier in Modifiers)
+            {
+                result.AddRange(modifier.BundlesToUse);
+            }
 
-    ];
+            return result;
+        }
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

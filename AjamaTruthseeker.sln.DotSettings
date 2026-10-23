@@ -2,13 +2,19 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=1BE313041F989B4185D2966033C031C3/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=1BE313041F989B4185D2966033C031C3/EntryName/@EntryValue">Custom Card</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=1BE313041F989B4185D2966033C031C3/Position/@EntryValue">10</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=1BE313041F989B4185D2966033C031C3/Position/@EntryValue">7</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=36408D8B84AF3F40A9244474B71C90E6/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=36408D8B84AF3F40A9244474B71C90E6/EntryName/@EntryValue">Custom Card</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=36408D8B84AF3F40A9244474B71C90E6/Position/@EntryValue">13</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=567DCF4B487C244A9F6BB46E4E9F3B84/Position/@EntryValue">6</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=7F2A1BE8D0078241A9AE7802038BAD3C/Position/@EntryValue">8</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=B4D0CA86CBDACD42AD544A77CAE9FDEC/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=B4D0CA86CBDACD42AD544A77CAE9FDEC/EntryName/@EntryValue">Custom Relic</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=B4D0CA86CBDACD42AD544A77CAE9FDEC/Position/@EntryValue">11</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=B4D0CA86CBDACD42AD544A77CAE9FDEC/Position/@EntryValue">9</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=00E2BB0BE57C7344A9558AF85C99E086/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=00E2BB0BE57C7344A9558AF85C99E086/EntryName/@EntryValue">Custom Power</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=00E2BB0BE57C7344A9558AF85C99E086/Position/@EntryValue">12</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=00E2BB0BE57C7344A9558AF85C99E086/Position/@EntryValue">11</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=F0CA621CDF5AB24282D8CDC11C520997/Entry/=C4795E57DDEC1C4F97BBC8C7173EBBCA/Position/@EntryValue">10</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Field/=CLASS/Expression/@EntryValue">getAlphaNumericFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=1BE313041F989B4185D2966033C031C3/Field/=COST/Expression/@EntryValue">guessExpectedType("")</s:String>
@@ -85,6 +91,54 @@ public class $CLASS$() : AjamaTruthseeker.AjamaTruthseekerCode.Cards.AjamaTruths
 
     protected override void OnUpgrade() {
         
+    }
+}</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/CustomProperties/=FileName/@EntryIndexedValue">NewTheory</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Description/@EntryValue">Custom Theory</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=CLASS/Expression/@EntryValue">getAlphaNumericFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=CLASS/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Text/@EntryValue">using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+
+namespace $NAMESPACE$;
+
+public class $CLASS$ : AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers.AbstractTheoryMod {
+    protected override IEnumerable&lt;DynamicVar&gt; CanonicalVars =&gt;
+    [
+        $END$
+    ];
+
+    public override BundledHoverTipManager MyBundles =&gt;
+    [
+        
+    ];
+
+    public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        
+    }
+    
+    public override bool ApplyStacked(CardModifier newApplied)
+    {
+        
+        return true;
     }
 }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B4D0CA86CBDACD42AD544A77CAE9FDEC/@KeyIndexDefined">True</s:Boolean>

@@ -62,6 +62,8 @@ public class Test() : AjamaTruthseekerCard(0,
             };
 
             theory.AddModifier(damage);
+            
+            theory.AddModifier<WeakTheory>();
         }
     }
 

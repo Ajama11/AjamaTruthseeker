@@ -128,6 +128,19 @@
           "optional": false
         }
       ]
+    },
+    {
+      "id": "card_modifier",
+      "markers": [
+        "AbstractTheoryMod"
+      ],
+      "fields": [
+        {
+          "name": "description",
+          "file": "card_modifiers.json",
+          "optional": false
+        }
+      ]
     }
   ],
   "pinnedColors": [],

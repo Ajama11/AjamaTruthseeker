@@ -1,4 +1,4 @@
 {
-  "AJAMATRUTHSEEKER-DAMAGE_THEORY.description": "#{HasSingle:Deal !Single! damage.|}{NewLineAfterSingle:\n|}{HasAoe:Deal !Aoe! damage to ALL enemies.|}{NewLineAfterAoe:\n|}{HasRandom:Deal !Random! damage to a random enemy.|}",
+  "AJAMATRUTHSEEKER-DAMAGE_THEORY.description": "#{HasSingle:Deal !Single! damage{HasSingleTimes: !SingleTimes! times|}.|}{NewLineAfterSingle:\n|}{HasAoe:Deal !Aoe! damage to ALL enemies{HasAoeTimes: !AoeTimes! times|}.|}{NewLineAfterAoe:\n|}{HasRandom:Deal !Random! damage to a random enemy{HasRandomTimes: !RandomTimes! times|}.|}",
   "AJAMATRUTHSEEKER-POWER_THEORY.description": "#{IsDebuff:Apply {Amount} [gold]{PowerName}[/gold]{Aoe: to ALL enemies|{Self: to yourself|}}.|{Self:Gain|{Aoe:ALL enemies gain|The enemy gains}} {Amount} [gold]{PowerName}[/gold].}"
 }

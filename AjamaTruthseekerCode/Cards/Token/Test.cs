@@ -36,16 +36,35 @@ public class Test() : AjamaTruthseekerCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int randomType = this.Rng.CombatCardGeneration.NextInt(0, 3);
-        var damage = randomType switch
-        {
-            0 => DamageTheory.Create(single: DynamicVars.Damage.BaseValue),
-            1 => DamageTheory.Create(aoe: DynamicVars.Damage.BaseValue),
-            _ => DamageTheory.Create(random: DynamicVars.Damage.BaseValue)
-        };
-
-        await MyActions.Theorize(Owner, damage);
+        // int randomType = this.Rng.CombatCardGeneration.NextInt(0, 3);
+        // var damage = randomType switch
+        // {
+        //     0 => DamageTheory.Create(single: DynamicVars.Damage.BaseValue, singleTimes: 1),
+        //     1 => DamageTheory.Create(aoe: DynamicVars.Damage.BaseValue),
+        //     _ => DamageTheory.Create(random: DynamicVars.Damage.BaseValue, randomTimes: 2)
+        // };
+        //
+        // await MyActions.Theorize(Owner, damage);
+        MainFile.Logger.Warn($"Test is playing");
+        
+        MainFile.Logger.Warn($"Adding 1 damage +1 time");
+        await MyActions.Theorize(Owner, DamageTheory.Create(single: DynamicVars.Damage.BaseValue, singleTimes: 1));
+        MainFile.Logger.Warn($"1 damage +1 time was added");
+        
+        MainFile.Logger.Warn($"Adding Self Vuln");
         await MyActions.Theorize(Owner, VulnerableSelfTheory.Create());
+        MainFile.Logger.Warn($"Self Vuln was added");
+        
+        MainFile.Logger.Warn($"Adding 1 Aoe damage");
+        await MyActions.Theorize(Owner, DamageTheory.Create(aoe: DynamicVars.Damage.BaseValue));
+        MainFile.Logger.Warn($"1 Aoe damage was added");
+        
+        MainFile.Logger.Warn($"Adding Aoe Weak");
         await MyActions.Theorize(Owner, WeakAoeTheory.Create());
+        MainFile.Logger.Warn($"Aoe Weak was added");
+        
+        MainFile.Logger.Warn($"Adding 1 random damage +2 times");
+        await MyActions.Theorize(Owner, DamageTheory.Create(random: DynamicVars.Damage.BaseValue, randomTimes: 2));
+        MainFile.Logger.Warn($"1 random damage +2 times was added");
     }
 }

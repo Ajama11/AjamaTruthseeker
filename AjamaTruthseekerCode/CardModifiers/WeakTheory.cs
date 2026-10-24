@@ -1,36 +1,20 @@
-using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
-using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Status;
-using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
-using BaseLib.Abstracts;
-using MegaCrit.Sts2.Core.Commands;
+using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers;
 
-public class WeakTheory : AbstractTheoryMod
+public class WeakTheory : AbstractPowerTheoryMod<WeakPower>
 {
-    public override TargetType Targeting => TargetType.AnyEnemy;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new MyPowerVar<WeakPower>(1)
-    ];
-
-    public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public static WeakTheory Create(int amount = 1)
     {
-        var target = cardPlay.Target ?? Rng.CombatTargets.NextItem(CombatState!.HittableEnemies);
-        if (target == null) return;
-
-        await PowerCmd.Apply<WeakPower>(choiceContext, target, DynamicVars.Weak.BaseValue, Player.Creature, Card);
-    }
-    
-    public override bool ApplyStacked(CardModifier newApplied)
-    {
-        DynamicVars.Weak.BaseValue += newApplied.DynamicVars.Weak.BaseValue;
-        return true;
+        var mod = ModelDb.CardModifier<WeakTheory>().TypedMutableClone();
+        return (WeakTheory) CreateInternal(mod,
+            TargetType.AnyEnemy,
+            amount,
+            PowerType.Debuff);
     }
 }

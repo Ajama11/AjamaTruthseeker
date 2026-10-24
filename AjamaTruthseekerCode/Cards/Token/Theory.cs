@@ -55,15 +55,8 @@ public class Theory() : AjamaTruthseekerCard(0,
         }
     }
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
-    {
-
-    }
-
     protected override void OnUpgrade()
     {
-
+        AddKeyword(CardKeyword.Retain);
     }
 }

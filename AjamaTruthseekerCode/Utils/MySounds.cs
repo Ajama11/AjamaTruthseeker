@@ -17,13 +17,35 @@ public static class MySounds
     private static readonly ModSound Foreseen3 = new("res://AjamaTruthseeker/audio/foreseen/foreseen3.ogg");
     public static readonly ModSound[] ForeseenSounds = [Foreseen1, Foreseen2, Foreseen3];
 
+    private static readonly ModSound Theorize1 = new("res://AjamaTruthseeker/audio/theorize/theorize1.ogg");
+    private static readonly ModSound Theorize2 = new("res://AjamaTruthseeker/audio/theorize/theorize2.ogg");
+    public static readonly ModSound[] TheorizeSounds = [Theorize1, Theorize2];
+
     public static void PlayRandom(ModSound[] sounds,
         float volumeAdd = 0F, float volumeMult = 1F,
         float pitchVariation = 0F, float basePitch = 1F)
     {
         Rng.Chaotic.NextItem(sounds)!.Play(volumeAdd, volumeMult, pitchVariation, basePitch);
     }
-
+    
+    private static Timer? ForeseenTimer { get; set; }
+    public static void PlayForeseen()
+    {
+        ForeseenTimer = PlayWithCooldown(ForeseenTimer, multipleSfx: ForeseenSounds, pitchVariation: 0.12f);
+    }
+    
+    private static Timer? ProveTimer { get; set; }
+    public static void PlayProve()
+    {
+        ProveTimer = PlayWithCooldown(ProveTimer, singleSfx: Prove, pitchVariation: 0.05f);
+    }
+    
+    private static Timer? TheorizeTimer { get; set; }
+    public static void PlayTheorize()
+    {
+        TheorizeTimer = PlayWithCooldown(TheorizeTimer, multipleSfx: TheorizeSounds, pitchVariation: 0.12f);
+    }
+    
     private static Timer? PlayWithCooldown(Timer? timer,
         ModSound? singleSfx = null, ModSound[]? multipleSfx = null,
         float volumeAdd = 0F, float volumeMult = 1F,
@@ -52,17 +74,5 @@ public static class MySounds
         timer.Start();
 
         return timer;
-    }
-    
-    private static Timer? ForeseenTimer { get; set; }
-    public static void PlayForeseen()
-    {
-        ForeseenTimer = PlayWithCooldown(ForeseenTimer, multipleSfx: ForeseenSounds, pitchVariation: 0.12f);
-    }
-    
-    private static Timer? ProveTimer { get; set; }
-    public static void PlayProve()
-    {
-        ProveTimer = PlayWithCooldown(ProveTimer, singleSfx: Prove, pitchVariation: 0.05f);
     }
 }

@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -35,20 +36,16 @@ public class Test() : AjamaTruthseekerCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        foreach (var theory in Owner.Hand.OfType<Theory>())
+        int randomType = this.Rng.CombatCardGeneration.NextInt(0, 3);
+        var damage = randomType switch
         {
-            int randomType = this.Rng.CombatCardGeneration.NextInt(0, 3);
+            0 => DamageTheory.Create(single: DynamicVars.Damage.BaseValue),
+            1 => DamageTheory.Create(aoe: DynamicVars.Damage.BaseValue),
+            _ => DamageTheory.Create(random: DynamicVars.Damage.BaseValue)
+        };
 
-            var damage = randomType switch
-            {
-                0 => DamageTheory.Create(single: DynamicVars.Damage.BaseValue),
-                1 => DamageTheory.Create(aoe: DynamicVars.Damage.BaseValue),
-                _ => DamageTheory.Create(random: DynamicVars.Damage.BaseValue)
-            };
-
-            theory.AddModifier(damage);
-            
-            theory.AddModifier<WeakTheory>();
-        }
+        await MyActions.Theorize(Owner, damage);
+        await MyActions.Theorize(Owner, VulnerableSelfTheory.Create());
+        await MyActions.Theorize(Owner, WeakAoeTheory.Create());
     }
 }

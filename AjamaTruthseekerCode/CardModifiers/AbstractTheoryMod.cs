@@ -21,7 +21,8 @@ public class AbstractTheoryMod : CardModifier, ICustomModel
     public virtual BundledHoverTipManager MyBundles => [];
     public virtual List<List<string>> BundleReorders => [];
     public virtual bool IsAttack => false;
-    public virtual TargetType Targeting => TargetType.Self;
+    public virtual TargetType Targeting { get; set; } = TargetType.Self;
+    public virtual string? MainLocKeyReplacement => null;
     
     public virtual void AddExtraArgsToLoc(LocString loc) { }
     
@@ -34,7 +35,8 @@ public class AbstractTheoryMod : CardModifier, ICustomModel
 
     public override void ModifyDescription(Creature? target, ref string description)
     {
-        if (!LocString.Exists("card_modifiers", $"{Id.Entry}.description"))
+        string idToCheck = MainLocKeyReplacement ?? $"{Id.Entry}";
+        if (!LocString.Exists("card_modifiers", $"{idToCheck}.description"))
             return;
         
         if (description.Length > 0) description += "\n";
@@ -43,7 +45,20 @@ public class AbstractTheoryMod : CardModifier, ICustomModel
     
     public override LocString GetLoc(string subKey = "description")
     {
-        LocString loc = base.GetLoc(subKey);
+        LocString loc;
+        
+        if (MainLocKeyReplacement == null)
+        {
+            loc = base.GetLoc(subKey);
+        }
+        else
+        {
+            loc = new LocString("card_modifiers", $"{MainLocKeyReplacement}.{subKey}");
+            
+            loc.Add("Amount", Amount);
+            loc.Add("TargetType", Owner == null ? "None" : Owner.TargetType.ToString());
+            DynamicVars.AddTo(loc);
+        }
         
         if (Owner == null) return loc;
         

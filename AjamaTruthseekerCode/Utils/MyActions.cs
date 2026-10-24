@@ -1,6 +1,9 @@
+using AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards;
 using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Status;
+using AjamaTruthseeker.AjamaTruthseekerCode.Cards.Token;
 using AjamaTruthseeker.AjamaTruthseekerCode.DynamicVars;
+using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using AjamaTruthseeker.AjamaTruthseekerCode.Hooks;
 using AjamaTruthseeker.AjamaTruthseekerCode.Powers;
 using AjamaTruthseeker.AjamaTruthseekerCode.Singletons;
@@ -333,5 +336,20 @@ public static class MyActions
         await CreateCards(ModelDb.Card<Nihility>(),
             amount, owner, combatState,
             pile, positionToUse, preview, previewTime, modifyCardsBeforePreview);
+    }
+
+    public static async Task Theorize(Player player, AbstractTheoryMod mod)
+    {
+        MySounds.PlayTheorize();
+
+        if (!player.Hand.Any(card => card is Theory))
+        {
+            await CreateCards(ModelDb.Card<Theory>(), 1, player, player.Creature.CombatState!);
+        }
+        
+        foreach (var theory in player.Hand.OfType<Theory>())
+        {
+            theory.AddModifier(mod);
+        }
     }
 }

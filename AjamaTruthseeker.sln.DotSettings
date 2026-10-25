@@ -112,10 +112,13 @@ public class $CLASS$() : AjamaTruthseeker.AjamaTruthseekerCode.Cards.AjamaTruths
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=36408D8B84AF3F40A9244474B71C90E6/Text/@EntryValue">using AjamaTruthseeker.AjamaTruthseekerCode.BundledHoverTips.Core;
+using AjamaTruthseeker.AjamaTruthseekerCode.Extensions;
 using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace $NAMESPACE$;
 
@@ -139,6 +142,15 @@ public class $CLASS$ : AjamaTruthseeker.AjamaTruthseekerCode.CardModifiers.Abstr
     {
         
         return true;
+    }
+    
+    public static $CLASS$ Create(int amount)
+    {
+        $CLASS$ mod = ModelDb.CardModifier&lt;$CLASS$&gt;().TypedMutableClone();
+        
+        
+
+        return mod;
     }
 }</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B4D0CA86CBDACD42AD544A77CAE9FDEC/@KeyIndexDefined">True</s:Boolean>

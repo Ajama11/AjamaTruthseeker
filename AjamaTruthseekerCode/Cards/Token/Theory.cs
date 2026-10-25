@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace AjamaTruthseeker.AjamaTruthseekerCode.Cards.Token;
 
 [Pool(typeof(TokenCardPool))]
-public class Theory() : AjamaTruthseekerCard(0,
+public class Theory() : AjamaTruthseekerCard(1,
     CardType.Skill, CardRarity.Token,
     TargetType.Self)
 {
@@ -57,6 +57,6 @@ public class Theory() : AjamaTruthseekerCard(0,
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Retain);
+        EnergyCost.UpgradeBy(-1);
     }
 }

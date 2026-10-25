@@ -88,7 +88,7 @@ public class DamageTheory : AbstractTheoryMod
                         VfxCmd.PlayOnCreatureCenter(target, VfxCmd.slashPath);
                     }
                 
-                    SfxCmd.PlayTmp(damageAmount >= strongDamageThreshold ? TmpSfx.heavyAttack : TmpSfx.slashAttack);
+                    SfxCmd.PlayTmp(damageAmount >= strongDamageThreshold ? TmpSfx.heavyAttack : TmpSfx.daggerThrow);
                 
                     attackContext.AddHit(
                         await CreatureCmd.Damage(choiceContext, target,

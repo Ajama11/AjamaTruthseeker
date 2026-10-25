@@ -38,9 +38,12 @@ public class AbstractTheoryMod : CardModifier, ICustomModel
         string idToCheck = MainLocKeyReplacement ?? $"{Id.Entry}";
         if (!LocString.Exists("card_modifiers", $"{idToCheck}.description"))
             return;
+
+        string text = GetLoc().GetFormattedText();
+        if (text.Length == 0) return;
         
         if (description.Length > 0) description += "\n";
-        description += GetLoc().GetFormattedText();
+        description += text;
     }
     
     public override LocString GetLoc(string subKey = "description")
